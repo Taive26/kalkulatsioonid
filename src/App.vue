@@ -83,7 +83,7 @@ export default {
       links: [
         'PALGAKALKULAATOR',
         'KÜTUSEKALKULAATOR',
-        'A PALJU SA KOHVI OLED JOONUD?',
+        'KOFEIINIKALKULAATOR',
       ],
     }),
 };
