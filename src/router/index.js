@@ -11,17 +11,17 @@ const routes = [
     component: Home
   },
   {
-    path: "/palgakalkulaator",
+    path: "/palk",
     name: "Palgakalkulaator",
     component: () => import("../views/Salary.vue"),
   },
   {
-    path: "/kütusekalkulaator",
+    path: "/kytus",
     name: "Kütusekalkulaator",
     component: () => import("../views/Fuel.vue"),
   },
   {
-    path: "/kohvi",
+    path: "/kohv",
     name: "Mitu tassi kohvi?",
     component: () => import("../views/Coffee.vue"),
   },
