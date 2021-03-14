@@ -1,21 +1,44 @@
 <template>
   <v-container>
-    <v-row class="text-center">
-      <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3 title-msg">
-          {{ msg }}
-        </h1>
-      </v-col>
-    </v-row>
+    <v-col class="text-center">
+      <v-text-field
+        v-model.number="a"
+        label="Sisesta siia number A"
+        hide-details="auto"
+        type="number"
+      ></v-text-field>
+      <v-text-field
+        v-model.number="b"
+        label="Sisesta siia number B"
+        hide-details="auto"
+        type="number"
+      ></v-text-field>
+      <h1>Nende arvude summa on: {{ result }}</h1>
+    </v-col>
   </v-container>
 </template>
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "Salary",
   props: {
-    msg: String
+    msg: String,
   },
-  data: () => ({})
+  data() {
+    return {
+      a: 0,
+      b: 0,
+    };
+  },
+  computed: {
+    result() {
+      return this.addAB(this.a, this.b);
+    },
+  },
+  methods: {
+    addAB(a, b) {
+      return +a + +b;
+    },
+  },
 };
 </script>
