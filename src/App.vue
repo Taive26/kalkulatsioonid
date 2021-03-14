@@ -16,14 +16,14 @@
     <v-main class="grey lighten-3">
       <v-container>
         <v-row>
-          <!--vasakpoolne osa    -->
+          <!--vasakpoolne osa    
           <v-col cols="12" sm="2" class="d-none d-sm-flex">
             <v-sheet rounded="lg" min-height="268">
               <div>
                 <leftpane />
               </div>
             </v-sheet>
-          </v-col>
+          </v-col> -->
 
           <!--keskmine osa -->
           <v-col cols="12" sm="8">
@@ -39,7 +39,7 @@
             ></v-sheet>
           </v-col>
 
-          <!--parempoolne osa -->
+          <!--parempoolne osa 
 
           <v-col cols="12" sm="2" class="d-none d-sm-flex">
             <v-sheet rounded="lg" min-height="268">
@@ -47,7 +47,7 @@
                 <rightpane />
               </div>
             </v-sheet>
-          </v-col>
+          </v-col> -->
         </v-row>
       </v-container>
     </v-main>
@@ -58,8 +58,8 @@
 import salary from "@/views/Salary";
 import coffee from "@/views/Coffee";
 import fuel from "@/views/Fuel";
-import leftpane from "@/views/LeftPane";
-import rightpane from "@/views/RightPane";
+// import leftpane from "@/views/LeftPane"; 
+// import rightpane from "@/views/RightPane"; 
 
 export default {
   name: "App",
@@ -67,8 +67,8 @@ export default {
     salary,
     coffee,
     fuel,
-    leftpane,
-    rightpane,
+   // leftpane,
+   // rightpane,
   },
   data: () => ({
     links: ["PALGAKALKULAATOR", "KÜTUSEKALKULAATOR", "KOFEIINIKALKULAATOR"],
