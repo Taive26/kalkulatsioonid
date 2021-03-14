@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../App.vue";
+import Home from "../views/Fuel.vue";
 
 Vue.use(VueRouter);
 
@@ -11,17 +11,17 @@ const routes = [
     component: Home
   },
   {
-    path: "/palgakalkulaator",
+    path: "/palk",
     name: "Palgakalkulaator",
     component: () => import("../views/Salary.vue"),
   },
   {
-    path: "/kütusekalkulaator",
+    path: "/kytus",
     name: "Kütusekalkulaator",
     component: () => import("../views/Fuel.vue"),
   },
   {
-    path: "/kohvi",
+    path: "/kohv",
     name: "Mitu tassi kohvi?",
     component: () => import("../views/Coffee.vue"),
   },
