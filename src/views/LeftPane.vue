@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <!--see on siis vasakpoolse sektsiooni kuvamine    -->
+      <!--see on siis vasakpoolse sektsiooni kuvamine, pildid ainult täiteks    -->
       <v-col cols="12" sm="2" class="d-none d-sm-flex">
         <v-sheet rounded="lg" min-height="268">
           <div v-show="current === 0">
