@@ -14,7 +14,7 @@
         type="number"
       ></v-text-field>
       <h1>Nende arvude summa on: {{ result }}</h1>
-      <line-chart :chartdata="chartData" :options="chartOptions"/>
+      <line-chart :chartdata="chartData" :options="chartOptions" />
     </v-col>
   </v-container>
 </template>

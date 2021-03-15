@@ -1,3 +1,15 @@
 <template>
- <h1>COFFEE-BREAK!</h1>
+  <div>
+    <Coffee />
+  </div>
 </template>
+
+<script>
+import Coffee from "@/components/coffee.vue";
+export default {
+  name: "KOFEIINIKALKULAATOR",
+  components: {
+    Coffee
+  },
+};
+</script>

@@ -1,3 +1,15 @@
 <template>
- <h1>FUEL!</h1>
+  <div>
+    <Fuel />
+  </div>
 </template>
+
+<script>
+import Fuel from "@/components/fuel.vue";
+export default {
+  name: "KÜTUSEKALKULAATOR",
+  components: {
+    Fuel,
+  },
+};
+</script>
