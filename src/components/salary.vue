@@ -2,20 +2,17 @@
   <v-container>
     <v-row justify="center" align="center">
       <v-col cols="12" md="6">
-        <h3 align="center">Sisesta siia oma brutopalk:</h3>
+        <h4 class="text-center font-weight-regular">
+          Sisesta siia oma brutopalk:
+        </h4>
         <v-text-field
           v-model.number="salary"
+          v-on:input="calculate(salary)"
           hide-details="auto"
           type="number"
-          class="pa-4 secondary text-center rounded-pill"
+          class="centered-input pa-4 secondary text-center rounded-pill"
         ></v-text-field>
-        <v-text-field
-          v-model.number="b"
-          label="Sisesta siia number B"
-          hide-details="auto"
-          type="number"
-          class="pa-4 secondary text-center rounded-pill"
-        ></v-text-field>
+        <h4 class="text-center font-weight-regular">EUR</h4>
       </v-col>
       <v-col cols="12" md="6">
         <v-checkbox
@@ -65,7 +62,7 @@
         ></v-checkbox>
       </v-col>
     </v-row>
-    <v-simple-table class="mb-7 mx-auto">
+    <v-simple-table class="mt-7 mb-7 mx-auto">
       <template v-slot:default>
         <thead>
           <tr>
@@ -93,7 +90,7 @@
         </tbody>
       </template>
     </v-simple-table>
-<v-simple-table class="mb-7 mx-auto">
+    <v-simple-table class="mb-7 mx-auto">
       <template v-slot:default>
         <thead>
           <tr>
@@ -133,68 +130,128 @@ export default {
   data() {
     return {
       salary: 0,
-      b: 0,
       employerTableItems: [
         {
           itemName: "Palgafond kokku",
-          resultAsMoney: "MIDAGI!",
-          resultAsPercent: "MIDAGI",
+          resultAsMoney: "0",
+          resultAsPercent: "0",
         },
         {
           itemName: "Brutopalk",
-          resultAsMoney:  this.salary,
-          resultAsPercent: "MIDAGI",
+          resultAsMoney: "0",
+          resultAsPercent: "0",
         },
         {
           itemName: "Sotsiaalmaks",
-          resultAsMoney: "MIDAGI!",
-          resultAsPercent: "MIDAGI",
+          resultAsMoney: "0",
+          resultAsPercent: "0",
         },
         {
           itemName: "Töötuskindlustus",
-          resultAsMoney: "MIDAGI!",
-          resultAsPercent: "MIDAGI",
+          resultAsMoney: "0",
+          resultAsPercent: "0",
         },
       ],
 
       employeeTableItems: [
         {
           itemName: "Brutopalk",
-          resultAsMoney: "MIDAGI!",
-          resultAsPercent: "MIDAGI",
+          resultAsMoney: "0",
+          resultAsPercent: "0",
         },
         {
           itemName: "Töötuskindlustus",
-          resultAsMoney: "MIDAGI!",
-          resultAsPercent: "MIDAGI",
+          resultAsMoney: "0",
+          resultAsPercent: "0",
         },
         {
           itemName: "Kogumispension",
-          resultAsMoney: "MIDAGI!",
-          resultAsPercent: "MIDAGI",
+          resultAsMoney: "0",
+          resultAsPercent: "0",
         },
         {
           itemName: "Tulumaks",
-          resultAsMoney: "MIDAGI!",
-          resultAsPercent: "MIDAGI",
+          resultAsMoney: "0",
+          resultAsPercent: "0",
         },
         {
           itemName: "Netopalk",
-          resultAsMoney: "MIDAGI!",
-          resultAsPercent: "MIDAGI!",
+          resultAsMoney: "0",
+          resultAsPercent: "0",
         },
       ],
     };
   },
-  computed: {
-    result() {
-      return this.addAB(this.salary, this.b);
-    },
-  },
+  computed: {},
+  //watch: {
+  //salary: function() {
+  //  this.calculate();
+  //  },
   methods: {
-    addAB(salary, b) {
-      return +salary + +b;
+    calculate(salary) {
+      const töötuskindlustus16 = salary * 0.016;
+      const kogumispension = salary * 0.02;
+      const tulumaks = (salary - salary * 0.036) * 0.2;
+      const netopalk = salary - töötuskindlustus16 - kogumispension - tulumaks;
+      const sotsiaalmaks = salary * 0.33;
+      const töötuskindlustus08 = salary * 0.008;
+      const palgafond = salary + sotsiaalmaks + töötuskindlustus08;
+
+      (this.employerTableItems = [
+        {
+          itemName: "Palgafond kokku",
+          resultAsMoney: palgafond,
+          resultAsPercent: 100,
+        },
+        {
+          itemName: "Brutopalk",
+          resultAsMoney: salary,
+          resultAsPercent: (salary / palgafond) * 100,
+        },
+        {
+          itemName: "Sotsiaalmaks",
+          resultAsMoney: sotsiaalmaks,
+          resultAsPercent: (sotsiaalmaks / palgafond) * 100,
+        },
+        {
+          itemName: "Töötuskindlustus",
+          resultAsMoney: töötuskindlustus08,
+          resultAsPercent: (töötuskindlustus08 / palgafond) * 100,
+        },
+      ]),
+        (this.employeeTableItems = [
+          {
+            itemName: "Brutopalk",
+            resultAsMoney: salary, // Mingi kindel kalkulatsioon
+            resultAsPercent: 100, // Mingi kindel kalkulatsioon
+          },
+          {
+            itemName: "Töötuskindlustus",
+            resultAsMoney: töötuskindlustus16, // Mingi kindel kalkulatsioon
+            resultAsPercent: 1.6, // Mingi kindel kalkulatsioon
+          },
+          {
+            itemName: "Kogumispension",
+            resultAsMoney: kogumispension, // Mingi kindel kalkulatsioon
+            resultAsPercent: 2, // Mingi kindel kalkulatsioon
+          },
+          {
+            itemName: "Tulumaks",
+            resultAsMoney: tulumaks, // Mingi kindel kalkulatsioon
+            resultAsPercent: (tulumaks / salary) * 100, // Mingi kindel kalkulatsioon
+          },
+          {
+            itemName: "Netopalk",
+            resultAsMoney: netopalk, // Mingi kindel kalkulatsioon
+            resultAsPercent: (netopalk / salary) * 100, // Mingi kindel kalkulatsioon
+          },
+        ]);
     },
   },
 };
 </script>
+<style>
+.centered-input input {
+  text-align: center;
+}
+</style>
