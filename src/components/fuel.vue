@@ -56,7 +56,6 @@ export default {
       if (Number.isFinite(answer)) {
         return (+journeyLength/+100) * +fuelConsumption * +fuelCost;
       } else {
-        console.error("Palun sisesta ainult numbreid");
         return 0;
       }
     },
