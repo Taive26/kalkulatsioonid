@@ -16,7 +16,8 @@
     <v-main class="grey lighten-3">
       <v-container>
         <v-row>
-          <v-col cols="3" sm="8">
+           <!--keskmine osa -->
+          <v-col cols="12" sm="12">
             <v-sheet min-height="70vh" rounded="lg">
               <div v-show="current === 0">
                 <home />
@@ -31,6 +32,13 @@
                 <coffee /></div
             ></v-sheet>
           </v-col>
+          <v-col cols="12" sm="2" class="d-none d-sm-flex">
+            <v-sheet rounded="lg" min-height="268">
+              <div>
+                <rightpane />
+              </div>
+            </v-sheet>
+          </v-col>
         </v-row>
       </v-container>
     </v-main>
@@ -42,7 +50,6 @@ import home from "@/views/Home";
 import salary from "@/views/Salary";
 import coffee from "@/views/Coffee";
 import fuel from "@/views/Fuel";
-
 export default {
   name: "App",
   components: {
@@ -52,13 +59,8 @@ export default {
     fuel,
   },
   data: () => ({
-    links: [
-      "HOME",
-      "PALGAKALKULAATOR",
-      "KÜTUSEKALKULAATOR",
-      "KOFEIINIKALKULAATOR",
-    ],
-    current: 0,
+    links: ["HOME", "PALGAKALKULAATOR", "KÜTUSEKALKULAATOR", "KOFEIINIKALKULAATOR"],
+    current: 1,
   }),
 };
 </script>

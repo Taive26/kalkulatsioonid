@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <Fuel />
-  </div>
+<div><Fuel /></div>
 </template>
 
 <script>
@@ -9,7 +7,7 @@ import Fuel from "@/components/fuel.vue";
 export default {
   name: "KÜTUSEKALKULAATOR",
   components: {
-    Fuel,
+    Fuel
   },
 };
 </script>

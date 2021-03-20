@@ -1,59 +1,65 @@
 <template>
   <v-container>
-    <v-row class="mt-10">
-      <v-col cols="12" sm="2" md="2"> </v-col>
-      <v-col cols="12" sm="2" md="2">
-        <v-checkbox label="Teekonna pikkus"></v-checkbox>
+    <v-row class="mt-10" justify="center">
+      <v-col sm="4" md="4">
+        <v-checkbox label= "Teekonna pikkus" color="warning"></v-checkbox>
+        <v-checkbox label="Keskmine kütusekulu" color="warning"></v-checkbox>
+        <v-checkbox label="Kütuse kogus" color="warning"></v-checkbox>
       </v-col>
-      <v-col cols="12" sm="4" md="4">
-        <v-text-field type="number"></v-text-field>
+      <v-col sm="4" md="4">
+        <v-text-field label="Teekonna pikkus" v-model="journeyLength" type="number" outlined ></v-text-field>
+        <v-text-field label="Keskmine kütusekulu" v-model="fuelConsumption" type="number" outlined></v-text-field>
+        <v-text-field label="Kütuse kogus" v-model="fuelAmount" type="number" outlined></v-text-field>
+         <v-text-field label="Kütuseühiku hind" v-model="fuelCost" type="number" outlined></v-text-field>
       </v-col>
-      <v-col cols="12" sm="2" md="2">
-        <v-select :items="items1" label="Kilomeeter(km)"></v-select>
+      <v-col sm="4" md="4">
+        <v-select :items="journeyUnits" label="Kilomeeter(km)" outlined></v-select>
+        <v-select :items="consumptionUnits" label="Liitrit/100km" outlined></v-select>
+        <v-select :items="fuelUnits" label="Liiter(l)" outlined></v-select>
       </v-col>
-      <v-col cols="12" sm="2" md="2"> </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12" sm="2" md="2"> </v-col>
-      <v-col cols="12" sm="2" md="2">
-        <v-checkbox label="Keskmine kütusekulu"></v-checkbox>
-      </v-col>
-      <v-col cols="12" sm="4" md="4">
-        <v-text-field type="number"></v-text-field>
-      </v-col>
-      <v-col cols="12" sm="2" md="2">
-        <v-select :items="items2" label="Liitrit/100km"></v-select>
-      </v-col>
-      <v-col cols="12" sm="2" md="2"> </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12" sm="2" md="2"> </v-col>
-      <v-col cols="12" sm="2" md="2">
-        <v-checkbox label="Kütuse kogus"></v-checkbox>
-      </v-col>
-      <v-col cols="12" sm="4" md="4">
-        <v-text-field type="number"></v-text-field>
-      </v-col>
-      <v-col cols="12" sm="2" md="2">
-        <v-select :items="items3" label="Liiter(l)"></v-select>
-      </v-col>
-      <v-col cols="12" sm="2" md="2"> </v-col>
     </v-row>
     <v-row class="mt-10">
-      <v-col cols="12" sm="2" md="2"> </v-col>
-      <v-col cols="12" sm="4" md="4">
-        <h2>Tulemus: ... eurot</h2>
+      <v-col sm="12" md="12">
+        <h2>Kütuse maksumus: {{result}} EUR</h2>
       </v-col>
-      <v-col cols="12" sm="2" md="2"> </v-col>
     </v-row>
   </v-container>
 </template>
+
 <script>
+
 export default {
   name: "Fuel",
-  data() {
-    return {};
+  props: {
+    msg: String,
   },
-  methods: {}
+
+  data() {
+    return {
+      journeyLength: 0,
+      fuelConsumption: 0,
+      fuelAmount: 0,
+      fuelCost: 0,
+      journeyUnits: ["Kilomeeter(km)"],
+      consumptionUnits: ["Liitrit/100km"],
+      fuelUnits: ["Liiter(l)"]
+    };
+  },
+  computed: {
+    result() {
+      return this.sum(this.journeyLength, this.fuelConsumption, this.fuelCost);
+    },
+  },
+  methods: {
+    sum(journeyLength, fuelConsumption, fuelCost) {
+      const answer = (+journeyLength / +100) * +fuelConsumption * +fuelCost;
+      if (Number.isFinite(answer)) {
+        return (+journeyLength/+100) * +fuelConsumption * +fuelCost;
+      } else {
+        console.error("Palun sisesta ainult numbreid");
+        return 0;
+      }
+    },
+  },
 };
 </script>
