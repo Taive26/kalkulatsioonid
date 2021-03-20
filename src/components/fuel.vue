@@ -52,8 +52,8 @@ export default {
   },
   methods: {
     sum(journeyLength, fuelConsumption, fuelCost) {
-      const answer = (+journeyLength / +100) * +fuelConsumption * +fuelCost;
-      if (Number.isFinite(answer)) {
+      const input = (+journeyLength / +100) * +fuelConsumption * +fuelCost;
+      if (Number.isFinite(input)) {
         return (+journeyLength/+100) * +fuelConsumption * +fuelCost;
       } else {
         return 0;
