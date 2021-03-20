@@ -16,7 +16,6 @@
     <v-main class="grey lighten-3">
       <v-container>
         <v-row>
-           <!--keskmine osa -->
           <v-col cols="12" sm="12">
             <v-sheet min-height="70vh" rounded="lg">
               <div v-show="current === 0">
@@ -31,13 +30,6 @@
               <div v-show="current === 3">
                 <coffee /></div
             ></v-sheet>
-          </v-col>
-          <v-col cols="12" sm="2" class="d-none d-sm-flex">
-            <v-sheet rounded="lg" min-height="268">
-              <div>
-                <rightpane />
-              </div>
-            </v-sheet>
           </v-col>
         </v-row>
       </v-container>
