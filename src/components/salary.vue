@@ -23,7 +23,7 @@
           label="Arvesta sotsiaalmaksu"
           type="checkbox"
           color="secondary"
-          :checked="() => calculate(salary)"
+          :input="() => calculate(salary)"
           v-on:change="() => checkIfSMChanged(calculateSM)"
         ></v-checkbox>
         <v-checkbox
@@ -143,19 +143,22 @@ export default {
       calculateSM: 1,
       salary: 0,
 
-      series: [3856,80,100,964],
+      series: [3856, 80, 100, 964],
       chartOptions: {
         chart: {
           width: 500,
           type: "pie",
         },
+        theme: {
+            palette: "palette3",
+          },
         labels: ["Netopalk", "Töötuskindlustus", "Kogumispension", "Tulumaks"],
         responsive: [
           {
             breakpoint: 480,
             options: {
               chart: {
-                width: 200,
+                width: 350,
               },
               legend: {
                 position: "bottom",
@@ -164,6 +167,8 @@ export default {
           },
         ],
       },
+
+    
 
       employerTableItems: [
         {
@@ -220,10 +225,9 @@ export default {
   computed: {},
 
   methods: {
-updateChart() {
-   this.series = [this.employeeTableItems.resultAsMoney]
-  },
-
+    updateChart() {
+      this.series = [this.employeeTableItems.resultAsMoney];
+    },
 
     checkIfSMChanged(calculateSM) {
       if (calculateSM.checked === true) {
