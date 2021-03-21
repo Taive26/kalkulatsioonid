@@ -52,7 +52,7 @@ export default {
   },
   data: () => ({
     links: ["HOME", "PALGAKALKULAATOR", "KÜTUSEKALKULAATOR", "KOFEIINIKALKULAATOR"],
-    current: 1,
+    current: 0,
   }),
 };
 </script>
