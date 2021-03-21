@@ -30,16 +30,11 @@
               </div>
             </v-sheet>
           </v-col> -->
-          <v-col cols="12" sm="2" class="d-none d-sm-flex">
-            <v-sheet rounded="lg" min-height="268">
-              <div>
-                <leftpane />
-              </div>
-            </v-sheet>
+          <v-col cols="12" sm="1" class="d-none d-sm-flex">
           </v-col>
 
           <!--keskmine osa -->
-          <v-col cols="12" sm="8">
+          <v-col cols="12" sm="10">
             <v-sheet min-height="70vh" rounded="lg">
               <div v-show="current === 0">
                 <home />
@@ -69,12 +64,7 @@
               </div> 
               </v-sheet>
           </v-col> -->
-          <v-col cols="12" sm="2" class="d-none d-sm-flex">
-            <v-sheet rounded="lg" min-height="268">
-              <div>
-                <rightpane />
-              </div>
-            </v-sheet>
+          <v-col cols="12" sm="1" class="d-none d-sm-flex">
           </v-col>
         </v-row>
       </v-container>
