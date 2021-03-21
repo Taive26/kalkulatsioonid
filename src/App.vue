@@ -3,10 +3,9 @@
     <Navigation
       :nav-links="navLinks"
       :image-path="require('./assets/calculator.png')"
-      background="#fff"
-      link-color="#777"
-      hoverBackground="#ddd"
-    />
+      background="#F5F6CE"
+      link-color="#000000"
+      hoverBackground="#F5F6CE"/>
     <router-view />
   </div>
 </template>
