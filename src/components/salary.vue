@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row justify="center" align="center">
-      <v-col cols="12" md="6">
+      <v-col cols="12" md="3">
         <h4 class="text-center font-weight-regular">
           Sisesta siia oma brutopalk:
         </h4>
@@ -14,15 +14,17 @@
         ></v-text-field>
         <h4 class="text-center font-weight-regular">EUR</h4>
       </v-col>
-      <v-col cols="12" md="6">
+      <v-col cols="12" md="3">
         <v-checkbox
-          v-model="checkbox"
-          :error-messages="errors"
-          value="1"
+          v-model="calculateSM"
+          v-bind:false-value="0"
+          v-bind:true-value="1"
+          name="sotsiaalmaks"
           label="Arvesta sotsiaalmaksu"
           type="checkbox"
           color="secondary"
-          required
+          :checked="() => calculate(salary)"
+          v-on:change="() => checkIfSMChanged(calculateSM)"
         ></v-checkbox>
         <v-checkbox
           v-model="checkbox"
@@ -60,6 +62,9 @@
           color="secondary"
           required
         ></v-checkbox>
+      </v-col>
+      <v-col cols="12" md="6">
+        <salary-pie></salary-pie>
       </v-col>
     </v-row>
     <v-simple-table class="mt-7 mb-7 mx-auto">
@@ -122,14 +127,40 @@
 </template>
 
 <script>
+import salaryPie from "./salaryPie.vue"
 export default {
   name: "Salary",
-  props: {
-    msg: String,
+  components: {
+    "salary-pie": salaryPie
   },
+  props: {},
+
   data() {
     return {
+      calculateSM: 1,
       salary: 0,
+      chartData: {
+          labels: ["Italy", "India", "Japan", "USA",],
+          datasets: [{
+              borderWidth: 1,
+              borderColor: [
+              'rgba(255,99,132,1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)'            
+              ],
+              backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',                
+              ],
+              data: [1000,	500,	1500,	1000]
+            }]
+        },
+
+
+      
       employerTableItems: [
         {
           itemName: "Palgafond kokku",
@@ -183,11 +214,17 @@ export default {
     };
   },
   computed: {},
-  //watch: {
-  //salary: function() {
-  //  this.calculate();
-  //  },
+  
   methods: {
+
+    checkIfSMChanged(calculateSM) {
+      if (calculateSM.checked === true) {
+        this.calculate(this.salary);
+      } else {
+        this.calculateWithoutSM(this.salary);
+      }
+    },
+
     calculate(salary) {
       const töötuskindlustus16 = salary * 0.016;
       const kogumispension = salary * 0.02;
@@ -206,44 +243,103 @@ export default {
         {
           itemName: "Brutopalk",
           resultAsMoney: salary,
-          resultAsPercent: (salary / palgafond) * 100,
+          resultAsPercent: +((salary / palgafond) * 100).toFixed(2),
         },
         {
           itemName: "Sotsiaalmaks",
           resultAsMoney: sotsiaalmaks,
-          resultAsPercent: (sotsiaalmaks / palgafond) * 100,
+          resultAsPercent: +((sotsiaalmaks / palgafond) * 100).toFixed(2),
         },
         {
           itemName: "Töötuskindlustus",
           resultAsMoney: töötuskindlustus08,
-          resultAsPercent: (töötuskindlustus08 / palgafond) * 100,
+          resultAsPercent: +((töötuskindlustus08 / palgafond) * 100).toFixed(2),
         },
       ]),
         (this.employeeTableItems = [
           {
             itemName: "Brutopalk",
-            resultAsMoney: salary, // Mingi kindel kalkulatsioon
-            resultAsPercent: 100, // Mingi kindel kalkulatsioon
+            resultAsMoney: salary,
+            resultAsPercent: 100,
           },
           {
             itemName: "Töötuskindlustus",
-            resultAsMoney: töötuskindlustus16, // Mingi kindel kalkulatsioon
-            resultAsPercent: 1.6, // Mingi kindel kalkulatsioon
+            resultAsMoney: töötuskindlustus16,
+            resultAsPercent: 1.6,
           },
           {
             itemName: "Kogumispension",
-            resultAsMoney: kogumispension, // Mingi kindel kalkulatsioon
-            resultAsPercent: 2, // Mingi kindel kalkulatsioon
+            resultAsMoney: kogumispension,
+            resultAsPercent: 2,
           },
           {
             itemName: "Tulumaks",
-            resultAsMoney: tulumaks, // Mingi kindel kalkulatsioon
-            resultAsPercent: (tulumaks / salary) * 100, // Mingi kindel kalkulatsioon
+            resultAsMoney: tulumaks,
+            resultAsPercent: (tulumaks / salary) * 100,
           },
           {
             itemName: "Netopalk",
-            resultAsMoney: netopalk, // Mingi kindel kalkulatsioon
-            resultAsPercent: (netopalk / salary) * 100, // Mingi kindel kalkulatsioon
+            resultAsMoney: netopalk,
+            resultAsPercent: (netopalk / salary) * 100,
+          },
+        ]);
+    },
+
+    calculateWithoutSM(salary) {
+      const töötuskindlustus16 = salary * 0.016;
+      const kogumispension = salary * 0.02;
+      const tulumaks = (salary - salary * 0.036) * 0.2;
+      const netopalk = salary - töötuskindlustus16 - kogumispension - tulumaks;
+      const töötuskindlustus08 = salary * 0.008;
+      const palgafond = salary + töötuskindlustus08;
+
+      (this.employerTableItems = [
+        {
+          itemName: "Palgafond kokku",
+          resultAsMoney: palgafond,
+          resultAsPercent: 100,
+        },
+        {
+          itemName: "Brutopalk",
+          resultAsMoney: salary,
+          resultAsPercent: +((salary / palgafond) * 100).toFixed(2),
+        },
+        {
+          itemName: "Sotsiaalmaks",
+          resultAsMoney: 0,
+          resultAsPercent: 0,
+        },
+        {
+          itemName: "Töötuskindlustus",
+          resultAsMoney: töötuskindlustus08,
+          resultAsPercent: ((töötuskindlustus08 / palgafond) * 100).toFixed(2),
+        },
+      ]),
+        (this.employeeTableItems = [
+          {
+            itemName: "Brutopalk",
+            resultAsMoney: salary,
+            resultAsPercent: 100,
+          },
+          {
+            itemName: "Töötuskindlustus",
+            resultAsMoney: töötuskindlustus16,
+            resultAsPercent: 1.6,
+          },
+          {
+            itemName: "Kogumispension",
+            resultAsMoney: kogumispension,
+            resultAsPercent: 2,
+          },
+          {
+            itemName: "Tulumaks",
+            resultAsMoney: tulumaks,
+            resultAsPercent: (tulumaks / salary) * 100,
+          },
+          {
+            itemName: "Netopalk",
+            resultAsMoney: netopalk,
+            resultAsPercent: (netopalk / salary) * 100,
           },
         ]);
     },
