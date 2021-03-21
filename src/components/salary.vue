@@ -64,7 +64,13 @@
         ></v-checkbox>
       </v-col>
       <v-col cols="12" md="6">
-        <salary-pie></salary-pie>
+        <h4 class="text-center font-weight-regular">Sinu brutopalk jaguneb nii:</h4>
+        <apexchart
+          type="pie"
+          width="380"
+          :options="chartOptions"
+          :series="series"
+        ></apexchart>
       </v-col>
     </v-row>
     <v-simple-table class="mt-7 mb-7 mx-auto">
@@ -127,40 +133,38 @@
 </template>
 
 <script>
-import salaryPie from "./salaryPie.vue"
 export default {
   name: "Salary",
-  components: {
-    "salary-pie": salaryPie
-  },
+  components: {},
   props: {},
 
   data() {
     return {
       calculateSM: 1,
       salary: 0,
-      chartData: {
-          labels: ["Italy", "India", "Japan", "USA",],
-          datasets: [{
-              borderWidth: 1,
-              borderColor: [
-              'rgba(255,99,132,1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)'            
-              ],
-              backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',                
-              ],
-              data: [1000,	500,	1500,	1000]
-            }]
+
+      series: [3856,80,100,964],
+      chartOptions: {
+        chart: {
+          width: 500,
+          type: "pie",
         },
+        labels: ["Netopalk", "Töötuskindlustus", "Kogumispension", "Tulumaks"],
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 200,
+              },
+              legend: {
+                position: "bottom",
+              },
+            },
+          },
+        ],
+      },
 
-
-      
       employerTableItems: [
         {
           itemName: "Palgafond kokku",
@@ -214,8 +218,12 @@ export default {
     };
   },
   computed: {},
-  
+
   methods: {
+updateChart() {
+   this.series = [this.employeeTableItems.resultAsMoney]
+  },
+
 
     checkIfSMChanged(calculateSM) {
       if (calculateSM.checked === true) {
