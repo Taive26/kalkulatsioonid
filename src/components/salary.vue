@@ -23,8 +23,7 @@
           label="Arvesta sotsiaalmaksu"
           type="checkbox"
           color="secondary"
-          :input="() => calculate(salary)"
-          v-on:change="() => checkIfSMChanged(calculateSM)"
+          @input="calculate(salary)"
         ></v-checkbox>
         <v-checkbox
           v-model="checkbox"
@@ -64,7 +63,9 @@
         ></v-checkbox>
       </v-col>
       <v-col cols="12" md="6">
-        <h4 class="text-center font-weight-regular">Sinu brutopalk jaguneb nii:</h4>
+        <h4 class="text-center font-weight-regular">
+          Sinu brutopalk jaguneb nii:
+        </h4>
         <apexchart
           type="pie"
           width="380"
@@ -140,7 +141,7 @@ export default {
 
   data() {
     return {
-      calculateSM: 1,
+      calculateSM: 0,
       salary: 0,
 
       series: [3856, 80, 100, 964],
@@ -150,8 +151,8 @@ export default {
           type: "pie",
         },
         theme: {
-            palette: "palette3",
-          },
+          palette: "palette3",
+        },
         labels: ["Netopalk", "Töötuskindlustus", "Kogumispension", "Tulumaks"],
         responsive: [
           {
@@ -167,8 +168,6 @@ export default {
           },
         ],
       },
-
-    
 
       employerTableItems: [
         {
@@ -229,24 +228,11 @@ export default {
       this.series = [this.employeeTableItems.resultAsMoney];
     },
 
-    checkIfSMChanged(calculateSM) {
-      if (calculateSM.checked === true) {
-        this.calculate(this.salary);
-      } else {
-        this.calculateWithoutSM(this.salary);
-      }
-    },
-
     calculate(salary) {
-      const töötuskindlustus16 = salary * 0.016;
-      const kogumispension = salary * 0.02;
-      const tulumaks = (salary - salary * 0.036) * 0.2;
-      const netopalk = salary - töötuskindlustus16 - kogumispension - tulumaks;
-      const sotsiaalmaks = salary * 0.33;
-      const töötuskindlustus08 = salary * 0.008;
-      const palgafond = salary + sotsiaalmaks + töötuskindlustus08;
+      const netopalk = salary;
+      const palgafond = salary;
 
-      (this.employerTableItems = [
+     (this.employerTableItems = [
         {
           itemName: "Palgafond kokku",
           resultAsMoney: palgafond,
@@ -259,13 +245,13 @@ export default {
         },
         {
           itemName: "Sotsiaalmaks",
-          resultAsMoney: sotsiaalmaks,
-          resultAsPercent: +((sotsiaalmaks / palgafond) * 100).toFixed(2),
+          resultAsMoney: 0,
+          resultAsPercent: +((0 / palgafond) * 100).toFixed(2),
         },
         {
           itemName: "Töötuskindlustus",
-          resultAsMoney: töötuskindlustus08,
-          resultAsPercent: +((töötuskindlustus08 / palgafond) * 100).toFixed(2),
+          resultAsMoney: 0,
+          resultAsPercent: +((0 / palgafond) * 100).toFixed(2),
         },
       ]),
         (this.employeeTableItems = [
@@ -276,25 +262,30 @@ export default {
           },
           {
             itemName: "Töötuskindlustus",
-            resultAsMoney: töötuskindlustus16,
-            resultAsPercent: 1.6,
+            resultAsMoney: 0,
+            resultAsPercent: 0,
           },
           {
             itemName: "Kogumispension",
-            resultAsMoney: kogumispension,
-            resultAsPercent: 2,
+            resultAsMoney: 0,
+            resultAsPercent: 0,
           },
           {
             itemName: "Tulumaks",
-            resultAsMoney: tulumaks,
-            resultAsPercent: (tulumaks / salary) * 100,
+            resultAsMoney: 0,
+            resultAsPercent: (0 / salary) * 100,
           },
           {
             itemName: "Netopalk",
             resultAsMoney: netopalk,
-            resultAsPercent: (netopalk / salary) * 100,
+            resultAsPercent: (salary / salary) * 100,
           },
         ]);
+
+        if (this.calculateSM) {
+        this.calculateWithoutSM()
+        }
+      }
     },
 
     calculateWithoutSM(salary) {
@@ -355,8 +346,7 @@ export default {
           },
         ]);
     },
-  },
-};
+  };
 </script>
 <style>
 .centered-input input {
