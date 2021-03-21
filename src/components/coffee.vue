@@ -7,8 +7,8 @@ PLAAN
 3) lethalDose - caffeineConsumed = caffeineTillDeath
 4) konvertida caffeineTillDeath tassideks ja KUVADA "Võid juua veel {{cupsTillDeath}} tassi "
 -->
-    <v-row align="center" justify="center">
-      <v-col sm="4" md="4">
+    <v-row class="mt-40 mob" align="center" justify="center">
+      <v-col md="4" class="hidden">
         <v-row>
           <div id="app" align="center">
             <img
@@ -18,7 +18,7 @@ PLAAN
             /></div
         ></v-row>
       </v-col>
-      <v-col sm="6" md="6" class="align-content-center">
+      <v-col sm="12" md="6" lg="6" class="align-content-center">
         <v-row
           ><div>
             <v-text-field
@@ -43,18 +43,21 @@ PLAAN
               outlined
             ></v-text-field></div
         ></v-row>
-        <v-row class="mt-10">
+        <v-row class="mt-10" sm="12" md="1">
           <h2>Võid juua veel ... tassi</h2>
         </v-row>
       </v-col>
-      <v-col sm="1" md="1">
+      <v-col sm="12" md="1" class="hidden">
         <v-row
           ><div
             id="app"
             alt="coffee cups"
             class="d-flex flex-column justify-space-between align-center"
           >
-            <img class="rightpane" src="@/assets/kohvitassid.png" /></div
+            <img
+              class="rightpane"
+              src="@/assets/kohvitassid.png"
+            /></div
         ></v-row>
       </v-col>
     </v-row>
@@ -62,11 +65,23 @@ PLAAN
 </template>
 
 <style scoped>
+.mt-40 {
+  margin-top: 40px;
+}
+
 img.rightpane {
   width: 200px;
 }
 img.leftpane {
   width: 250px;
+}
+
+@media screen and (max-width: 759px) {
+  .mob {
+    margin-top: 0px;
+    padding-top: 30px;
+    padding-left: 30px;
+  }
 }
 </style>
 
