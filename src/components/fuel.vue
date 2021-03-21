@@ -1,30 +1,36 @@
 <template>
   <v-container>
-    <v-row class="mt-10" justify="center">
-      <v-col sm="4" md="4">
+    <v-row class="mt-40" justify="center">
+      <v-col sm="12" md="4">
         <v-checkbox label= "Teekonna pikkus" color="warning"></v-checkbox>
-        <v-checkbox label="Keskmine kütusekulu" color="warning"></v-checkbox>
+        <v-checkbox label="Kütusekulu" color="warning"></v-checkbox>
         <v-checkbox label="Kütuse kogus" color="warning"></v-checkbox>
       </v-col>
-      <v-col sm="4" md="4">
-        <v-text-field label="Teekonna pikkus" v-model="journeyLength" type="number" outlined ></v-text-field>
+      <v-col sm="12" md="4">
+        <v-text-field label="Teekonna pikkus" v-model="journeyLength" type="number" outlined></v-text-field>
         <v-text-field label="Keskmine kütusekulu" v-model="fuelConsumption" type="number" outlined></v-text-field>
         <v-text-field label="Kütuse kogus" v-model="fuelAmount" type="number" outlined></v-text-field>
          <v-text-field label="Kütuseühiku hind" v-model="fuelCost" type="number" outlined></v-text-field>
       </v-col>
-      <v-col sm="4" md="4">
-        <v-select :items="journeyUnits" label="Kilomeeter(km)" outlined></v-select>
+      <v-col md="4" class="hidden">
+        <v-select :items="journeyUnits" label="Kilomeeter(km)" outlined ></v-select>
         <v-select :items="consumptionUnits" label="Liitrit/100km" outlined></v-select>
         <v-select :items="fuelUnits" label="Liiter(l)" outlined></v-select>
       </v-col>
     </v-row>
     <v-row class="mt-10">
-      <v-col sm="12" md="12">
+      <v-col sm="12" md="4">
         <h2>Kütuse maksumus: {{result}} EUR</h2>
       </v-col>
     </v-row>
   </v-container>
 </template>
+
+<style scoped>
+.mt-40{
+margin-top: 40px;
+}
+</style>
 
 <script>
 
