@@ -16,30 +16,7 @@
     <v-main class="grey lighten-3">
       <v-container>
         <v-row>
-          <!--vasakpoolne osa    -->
-          <!--           <v-col cols="12" sm="2" class="d-none d-sm-flex">
-            <v-sheet rounded="lg" min-height="268">
-              <div v-show="current === 0">
-                <imageSalary />
-              </div>
-              <div v-show="current === 1">
-                <imageFuel />
-              </div>
-              <div v-show="current === 2">
-                <imageCoffee />
-              </div>
-            </v-sheet>
-          </v-col> -->
-          <v-col cols="12" sm="2" class="d-none d-sm-flex">
-            <v-sheet rounded="lg" min-height="268">
-              <div>
-                <leftpane />
-              </div>
-            </v-sheet>
-          </v-col>
-
-          <!--keskmine osa -->
-          <v-col cols="12" sm="8">
+          <v-col cols="12" sm="12">
             <v-sheet min-height="70vh" rounded="lg">
               <div v-show="current === 0">
                 <home />
@@ -54,28 +31,6 @@
                 <coffee /></div
             ></v-sheet>
           </v-col>
-
-          <!--parempoolne osa 
-          <v-col cols="12" sm="2">
-            <v-sheet rounded="lg" min-height="268">
-              <div v-show="current === 0">
-                <salary />
-              </div>
-              <div v-show="current === 1">
-                <fuel />
-              </div>
-              <div v-show="current === 2">
-                <coffee />
-              </div> 
-              </v-sheet>
-          </v-col> -->
-          <v-col cols="12" sm="2" class="d-none d-sm-flex">
-            <v-sheet rounded="lg" min-height="268">
-              <div>
-                <rightpane />
-              </div>
-            </v-sheet>
-          </v-col>
         </v-row>
       </v-container>
     </v-main>
@@ -87,8 +42,6 @@ import home from "@/views/Home";
 import salary from "@/views/Salary";
 import coffee from "@/views/Coffee";
 import fuel from "@/views/Fuel";
-/* import leftpane from "@/views/LeftPane";
-import rightpane from "@/views/RightPane"; */
 export default {
   name: "App",
   components: {
@@ -96,12 +49,10 @@ export default {
     salary,
     coffee,
     fuel,
-    /*     leftpane,
-    rightpane, */
   },
   data: () => ({
     links: ["HOME", "PALGAKALKULAATOR", "KÜTUSEKALKULAATOR", "KOFEIINIKALKULAATOR"],
-    current: 0,
+    current: 1,
   }),
 };
 </script>
