@@ -10,6 +10,6 @@ export default {
   name: "KOFEIINIKALKULAATOR",
   components: {
     Coffee
-  }
+  },
 };
 </script>
