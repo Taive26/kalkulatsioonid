@@ -46,6 +46,26 @@
           color="secondary"
           @change="calculate(salary)"
         ></v-checkbox>
+        <v-checkbox
+          v-model="calculateTK16"
+          v-bind:false-value="0"
+          v-bind:true-value="1"
+          name="töötuskindlustus16"
+          label="Arvesta töötuskindlustust töötajale (1,6%)"
+          type="checkbox"
+          color="secondary"
+          @change="calculate(salary)"
+        ></v-checkbox>
+        <v-checkbox
+          v-model="calculatePension"
+          v-bind:false-value="0"
+          v-bind:true-value="1"
+          name="kogumispension"
+          label="Arvesta kogumispensionit (2%)"
+          type="checkbox"
+          color="secondary"
+          @change="calculate(salary)"
+        ></v-checkbox>
       </v-col>
       <v-col cols="12" md="6">
         <h4 class="text-center font-weight-regular">
@@ -128,7 +148,9 @@ export default {
     return {
       calculateSM: 0,
       calculateTK8: 0,
+      calculateTK16: 0,
       calculateTM: 0,
+      calculatePension: 0,
       salary: 0,
 
       series: [3856, 80, 100, 964],
@@ -215,6 +237,8 @@ export default {
       const netopalk = salary;
       const sotsiaalmaks = salary * 0.33;
       const töötuskindlustus8 = salary * 0.008;
+      const töötuskindlustus16 = salary*0.016;
+      const pension = salary*0.02;
       const revenueToBeTaxed1 = salary - 500;
       const revenueToBeTaxed2 = +(
         salary -
@@ -468,6 +492,405 @@ export default {
               resultAsMoney: +(salary - taxOnRevenue3).toFixed(2),
               resultAsPercent: +(
                 ((salary - taxOnRevenue3) / salary) *
+                100
+              ).toFixed(2),
+            },
+          ];
+        }
+      }
+
+      if (this.calculateTK16) {
+        this.employeeTableItems = [
+          {
+            itemName: "Brutopalk",
+            resultAsMoney: salary,
+            resultAsPercent: 100,
+          },
+          {
+            itemName: "Töötuskindlustus",
+            resultAsMoney: töötuskindlustus16,
+            resultAsPercent: +((töötuskindlustus16/salary)*100).toFixed(2),
+          },
+          {
+            itemName: "Kogumispension",
+            resultAsMoney: 0,
+            resultAsPercent: 0,
+          },
+          {
+            itemName: "Tulumaks",
+            resultAsMoney: 0,
+            resultAsPercent: 0,
+          },
+          {
+            itemName: "Netopalk",
+            resultAsMoney: salary - töötuskindlustus16,
+            resultAsPercent: +(
+              ((salary - töötuskindlustus16) / salary) *
+              100
+            ).toFixed(2),
+          },
+        ];
+      }
+
+      if (this.calculateTK16 && this.calculateTM) {
+        if (salary <= 1200) {
+          this.employeeTableItems = [
+            {
+              itemName: "Brutopalk",
+              resultAsMoney: salary,
+              resultAsPercent: 100,
+            },
+            {
+              itemName: "Töötuskindlustus",
+              resultAsMoney: töötuskindlustus16,
+              resultAsPercent: +((töötuskindlustus16/salary)*100).toFixed(2),
+            },
+            {
+              itemName: "Kogumispension",
+              resultAsMoney: 0,
+              resultAsPercent: 0,
+            },
+            {
+              itemName: "Tulumaks",
+              resultAsMoney: taxOnRevenue1,
+              resultAsPercent: +((taxOnRevenue1 / salary) * 100).toFixed(2),
+            },
+            {
+              itemName: "Netopalk",
+              resultAsMoney: salary-töötuskindlustus16-taxOnRevenue1,
+              resultAsPercent: +(
+                ((salary-töötuskindlustus16-taxOnRevenue1) / salary) *
+                100
+              ).toFixed(2),
+            },
+          ];
+        }
+        if (salary >= 1201 && salary <= 2099) {
+          this.employeeTableItems = [
+            {
+              itemName: "Brutopalk",
+              resultAsMoney: salary,
+              resultAsPercent: 100,
+            },
+            {
+              itemName: "Töötuskindlustus",
+              resultAsMoney: töötuskindlustus16,
+              resultAsPercent: +((töötuskindlustus16/salary)*100).toFixed(2),
+            },
+            {
+              itemName: "Kogumispension",
+              resultAsMoney: 0,
+              resultAsPercent: 0,
+            },
+            {
+              itemName: "Tulumaks",
+              resultAsMoney: taxOnRevenue2,
+              resultAsPercent: +((taxOnRevenue2 / salary) * 100).toFixed(2),
+            },
+            {
+              itemName: "Netopalk",
+              resultAsMoney: +(salary-töötuskindlustus16-taxOnRevenue2).toFixed(2),
+              resultAsPercent: +(
+                ((salary-töötuskindlustus16-taxOnRevenue2) / salary) *
+                100
+              ).toFixed(2),
+            },
+          ];
+        }
+
+        if (salary >= 2100) {
+          this.employeeTableItems = [
+            {
+              itemName: "Brutopalk",
+              resultAsMoney: salary,
+              resultAsPercent: 100,
+            },
+            {
+              itemName: "Töötuskindlustus",
+              resultAsMoney: töötuskindlustus16,
+              resultAsPercent: +((töötuskindlustus16/salary)*100).toFixed(2),
+            },
+            {
+              itemName: "Kogumispension",
+              resultAsMoney: 0,
+              resultAsPercent: 0,
+            },
+            {
+              itemName: "Tulumaks",
+              resultAsMoney: taxOnRevenue3,
+              resultAsPercent: +((taxOnRevenue3 / salary) * 100).toFixed(2),
+            },
+            {
+              itemName: "Netopalk",
+              resultAsMoney: +(salary-töötuskindlustus16-taxOnRevenue3).toFixed(2),
+              resultAsPercent: +(
+                ((salary-töötuskindlustus16-taxOnRevenue3) / salary) *
+                100
+              ).toFixed(2),
+            },
+          ];
+        }
+      }
+
+      if (this.calculatePension) {
+        this.employeeTableItems = [
+          {
+            itemName: "Brutopalk",
+            resultAsMoney: salary,
+            resultAsPercent: 100,
+          },
+          {
+            itemName: "Töötuskindlustus",
+            resultAsMoney: 0,
+            resultAsPercent: 0,
+          },
+          {
+            itemName: "Kogumispension",
+            resultAsMoney: pension,
+            resultAsPercent: +((pension/salary)*100).toFixed(2),
+          },
+          {
+            itemName: "Tulumaks",
+            resultAsMoney: 0,
+            resultAsPercent: 0,
+          },
+          {
+            itemName: "Netopalk",
+            resultAsMoney: salary - pension,
+            resultAsPercent: +(
+              ((salary - pension) / salary) *
+              100
+            ).toFixed(2),
+          },
+        ];
+      }
+
+      if (this.calculatePension && this.calculateTM) {
+        if (salary <= 1200) {
+          this.employeeTableItems = [
+            {
+              itemName: "Brutopalk",
+              resultAsMoney: salary,
+              resultAsPercent: 100,
+            },
+            {
+              itemName: "Töötuskindlustus",
+              resultAsMoney: 0,
+              resultAsPercent: 0,
+            },
+            {
+              itemName: "Kogumispension",
+              resultAsMoney: pension,
+              resultAsPercent: +((pension/salary)*100).toFixed(2),
+            },
+            {
+              itemName: "Tulumaks",
+              resultAsMoney: taxOnRevenue1,
+              resultAsPercent: +((taxOnRevenue1 / salary) * 100).toFixed(2),
+            },
+            {
+              itemName: "Netopalk",
+              resultAsMoney: salary-pension-taxOnRevenue1,
+              resultAsPercent: +(
+                ((salary-pension-taxOnRevenue1) / salary) *
+                100
+              ).toFixed(2),
+            },
+          ];
+        }
+        if (salary >= 1201 && salary <= 2099) {
+          this.employeeTableItems = [
+            {
+              itemName: "Brutopalk",
+              resultAsMoney: salary,
+              resultAsPercent: 100,
+            },
+            {
+              itemName: "Töötuskindlustus",
+              resultAsMoney: 0,
+              resultAsPercent: 0,
+            },
+            {
+              itemName: "Kogumispension",
+              resultAsMoney: pension,
+              resultAsPercent: +((pension/salary)*100).toFixed(2),
+            },
+            {
+              itemName: "Tulumaks",
+              resultAsMoney: taxOnRevenue2,
+              resultAsPercent: +((taxOnRevenue2 / salary) * 100).toFixed(2),
+            },
+            {
+              itemName: "Netopalk",
+              resultAsMoney: +(salary-pension-taxOnRevenue2).toFixed(2),
+              resultAsPercent: +(
+                ((salary-pension-taxOnRevenue2) / salary) *
+                100
+              ).toFixed(2),
+            },
+          ];
+        }
+
+        if (salary >= 2100) {
+          this.employeeTableItems = [
+            {
+              itemName: "Brutopalk",
+              resultAsMoney: salary,
+              resultAsPercent: 100,
+            },
+            {
+              itemName: "Töötuskindlustus",
+              resultAsMoney: 0,
+              resultAsPercent: 0,
+            },
+            {
+              itemName: "Kogumispension",
+              resultAsMoney: 0,
+              resultAsPercent: 0,
+            },
+            {
+              itemName: "Tulumaks",
+              resultAsMoney: taxOnRevenue3,
+              resultAsPercent: +((taxOnRevenue3 / salary) * 100).toFixed(2),
+            },
+            {
+              itemName: "Netopalk",
+              resultAsMoney: +(salary-pension-taxOnRevenue3).toFixed(2),
+              resultAsPercent: +(
+                ((salary-pension-taxOnRevenue3) / salary) *
+                100
+              ).toFixed(2),
+            },
+          ];
+        }
+      }
+
+      if (this.calculatePension && this.calculateTK16) {
+        this.employeeTableItems = [
+          {
+            itemName: "Brutopalk",
+            resultAsMoney: salary,
+            resultAsPercent: 100,
+          },
+          {
+            itemName: "Töötuskindlustus",
+            resultAsMoney: töötuskindlustus16,
+            resultAsPercent: +((töötuskindlustus16/salary)*100).toFixed(2),
+          },
+          {
+            itemName: "Kogumispension",
+            resultAsMoney: pension,
+            resultAsPercent: +((pension/salary)*100).toFixed(2),
+          },
+          {
+            itemName: "Tulumaks",
+            resultAsMoney: 0,
+            resultAsPercent: 0,
+          },
+          {
+            itemName: "Netopalk",
+            resultAsMoney: salary - pension-töötuskindlustus16,
+            resultAsPercent: +(
+              ((salary - pension-töötuskindlustus16) / salary) *
+              100
+            ).toFixed(2),
+          },
+        ];
+      }
+
+      if (this.calculatePension && this.calculateTM && this.calculateTK16) {
+        if (salary <= 1200) {
+          this.employeeTableItems = [
+            {
+              itemName: "Brutopalk",
+              resultAsMoney: salary,
+              resultAsPercent: 100,
+            },
+            {
+              itemName: "Töötuskindlustus",
+              resultAsMoney: töötuskindlustus16,
+            resultAsPercent: +((töötuskindlustus16/salary)*100).toFixed(2),
+            },
+            {
+              itemName: "Kogumispension",
+              resultAsMoney: pension,
+              resultAsPercent: +((pension/salary)*100).toFixed(2),
+            },
+            {
+              itemName: "Tulumaks",
+              resultAsMoney: taxOnRevenue1,
+              resultAsPercent: +((taxOnRevenue1 / salary) * 100).toFixed(2),
+            },
+            {
+              itemName: "Netopalk",
+              resultAsMoney: salary-pension-taxOnRevenue1-töötuskindlustus16,
+              resultAsPercent: +(
+                ((salary-pension-taxOnRevenue1-töötuskindlustus16) / salary) *
+                100
+              ).toFixed(2),
+            },
+          ];
+        }
+        if (salary >= 1201 && salary <= 2099) {
+          this.employeeTableItems = [
+            {
+              itemName: "Brutopalk",
+              resultAsMoney: salary,
+              resultAsPercent: 100,
+            },
+            {
+              itemName: "Töötuskindlustus",
+              resultAsMoney: töötuskindlustus16,
+            resultAsPercent: +((töötuskindlustus16/salary)*100).toFixed(2),
+            },
+            {
+              itemName: "Kogumispension",
+              resultAsMoney: pension,
+              resultAsPercent: +((pension/salary)*100).toFixed(2),
+            },
+            {
+              itemName: "Tulumaks",
+              resultAsMoney: taxOnRevenue2,
+              resultAsPercent: +((taxOnRevenue2 / salary) * 100).toFixed(2),
+            },
+            {
+              itemName: "Netopalk",
+              resultAsMoney: +(salary-pension-taxOnRevenue2-töötuskindlustus16).toFixed(2),
+              resultAsPercent: +(
+                ((salary-pension-taxOnRevenue2-töötuskindlustus16) / salary) *
+                100
+              ).toFixed(2),
+            },
+          ];
+        }
+
+        if (salary >= 2100) {
+          this.employeeTableItems = [
+            {
+              itemName: "Brutopalk",
+              resultAsMoney: salary,
+              resultAsPercent: 100,
+            },
+            {
+              itemName: "Töötuskindlustus",
+              resultAsMoney: töötuskindlustus16,
+            resultAsPercent: +((töötuskindlustus16/salary)*100).toFixed(2),
+            },
+            {
+              itemName: "Kogumispension",
+              resultAsMoney: pension,
+              resultAsPercent: +((pension/salary)*100).toFixed(2),
+            },
+            {
+              itemName: "Tulumaks",
+              resultAsMoney: taxOnRevenue3,
+              resultAsPercent: +((taxOnRevenue3 / salary) * 100).toFixed(2),
+            },
+            {
+              itemName: "Netopalk",
+              resultAsMoney: +(salary-pension-taxOnRevenue3-töötuskindlustus16).toFixed(2),
+              resultAsPercent: +(
+                ((salary-pension-taxOnRevenue3-töötuskindlustus16) / salary) *
                 100
               ).toFixed(2),
             },
