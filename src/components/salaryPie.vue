@@ -7,7 +7,7 @@ export default {
   props: {
     chartdata: {
       type: Object,
-      default: null //jehuu!
+      default: null
     },
     options: {
       type: Object,
