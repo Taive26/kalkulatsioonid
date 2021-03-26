@@ -102,7 +102,7 @@ nav {
         margin-left: 10px;
         justify-content: space-between;
         margin-right: 13px;
-        background-color: #F5F6CE
+        background-color: #F5F6CE;
       }
     }
   }
