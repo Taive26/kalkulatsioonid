@@ -11,7 +11,7 @@ describe("fuel.vue", () => { // Nimetus - komponendi nimi
   const localVue = createLocalVue();
   let vuetify;
 
-  // Siia panna kõik, mida peaks tegeme enne iga testi jooksutamist
+  // Siia panna kõik, mida peaks tegema enne iga testi jooksutamist
   beforeEach(() => {
     vuetify = new Vuetify();
   });
