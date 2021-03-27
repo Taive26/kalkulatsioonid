@@ -1,6 +1,6 @@
 <template>
-  <nav :style="{ background: background || '#333' }">
-    <ul :style="{ background: background || '#333' }" ref="nav">
+  <nav :style="{ background: background || '#f0f184' }">
+    <ul :style="{ background: background || '#f0f184' }" ref="nav">
       <figure class="image-logo" @click="toggleNav">
         <img :src="imagePath" height="40px" width="40px" />
       </figure>
@@ -11,7 +11,7 @@
           $event.currentTarget.style.background = hoverBackground || '#999'
         "
         @mouseleave="
-          $event.currentTarget.style.background = background || '#333'
+          $event.currentTarget.style.background = background || '#f0f184'
         "
       >
         <router-link :to="link.path" :style="{ color: linkColor || '#DDD' }">
@@ -102,7 +102,7 @@ nav {
         margin-left: 10px;
         justify-content: space-between;
         margin-right: 13px;
-        background-color: #F5F6CE;
+        background-color: #f0f184;
       }
     }
   }

@@ -2,10 +2,11 @@
   <v-container>
     <!--
 PLAAN
-1) arvutada lethalDose kasutaja sisestatud kehamassi jaoks (200mg/kg kohta) - saab kasutaja surmava doosi
-2) arvutada caffeineConsumed vastavalt valitud kangusele 
-3) lethalDose - caffeineConsumed = caffeineTillDeath
-4) konvertida caffeineTillDeath tassideks ja KUVADA "Võid juua veel {{cupsTillDeath}} tassi "
+1) lethaldose = kasutaja sisestatud kehamass (kg) * 200       //kofeiini mürgistav doos mg-des
+2) caffeineConsumed = kasutaja valitud kangus (70, 150 või 300) * tasside arv       //tarbitud kofeiin mg-des
+3) caffeineTillDeath = lethaldose - caffeineconsumed       //surmava koguseni jäänud mg hulk
+4) cupsTillDeath = caffeineTillDeath / kasutaja valitud kangus (70, 150 või 300)     //ümardada täisarvuni
+5) Kasutajale kuvada {{cupsTillDeath - 1}}     
 -->
     <v-row class="mt-40 mob" align="center" justify="center">
       <v-col md="4" class="hidden">
@@ -68,8 +69,7 @@ img.leftpane {
           { value: null, text: 'Please select some item' },
           { value: 'a', text: 'This is First option' },
           { value: 'b', text: 'Default Selected Option' },
-          { value: 'c', text: 'This is another option' },
-          { value: 'd', text: 'This one is disabled', disabled: true }
+          { value: 'c', text: 'This is another option' }
         ]
       }
     }
