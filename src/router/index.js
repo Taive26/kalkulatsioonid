@@ -22,7 +22,7 @@ const routes = [
   },
   {
     path: "/kohv",
-    name: "Mitu tassi kohvi?",
+    name: "Kofeiinikalkulaator",
     component: () => import("../views/Coffee.vue"),
   },
 ];
