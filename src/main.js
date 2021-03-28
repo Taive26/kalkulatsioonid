@@ -4,10 +4,7 @@ import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
 import VueApexCharts from 'vue-apexcharts'
-import vSelect from "vue-select";
-
-Vue.use(VueApexCharts);
-Vue.component('v-select', vSelect.VueSelect);
+Vue.use(VueApexCharts)
 
 Vue.component('apexchart', VueApexCharts)
 
@@ -17,8 +14,5 @@ new Vue({
   router,
   store,
   vuetify,
-  vSelect,
   render: h => h(App)
 }).$mount("#app");
-
-  
