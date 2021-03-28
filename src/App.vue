@@ -1,80 +1,59 @@
 <template>
-  <div id="app">
-    <Navigation
-      :nav-links="navLinks"
-      :image-path="require('./assets/calculator.png')"
-      background="#F5F6CE"
-      link-color="#000000"
-      hoverBackground="#F5F6CE"/>
-    <router-view />
-  </div>
+  <v-app>
+    <v-app-bar app color="primary" light flat>
+      <v-tabs centered class="ml-n9" color="grey darken-1">
+        <v-tab
+          v-for="(link, i) in links"
+          :key="link"
+          @click="current = i"
+          :class="{ current: i == current }"
+        >
+          {{ link }}
+        </v-tab>
+      </v-tabs>
+    </v-app-bar>
+
+    <v-main class="grey lighten-3">
+      <v-container>
+        <v-row>
+          <v-col cols="12" sm="12">
+            <v-sheet min-height="70vh" rounded="lg">
+              <div v-show="current === 0">
+                <home />
+              </div>
+              <div v-show="current === 1">
+                <salary />
+              </div>
+              <div v-show="current === 2">
+                <fuel />
+              </div>
+              <div v-show="current === 3">
+                <coffee /></div
+            ></v-sheet>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import Navigation from "@/components/navigation";
+import home from "@/views/Home";
+import salary from "@/views/Salary";
+import coffee from "@/views/Coffee";
+import fuel from "@/views/Fuel";
 export default {
+  name: "App",
   components: {
-    Navigation,
+    home,
+    salary,
+    coffee,
+    fuel,
   },
   data: () => ({
-    navLinks: [
-      {
-        text: "HOME",
-        path: "/",
-        icon: "ion-ios-home",
-      },
-      {
-        text: "PALGAKALKULAATOR",
-        path: "/palk",
-        icon: "ion-ios-business",
-      },
-      {
-        text: "KÜTUSEKALKULAATOR",
-        path: "/kytus",
-        icon: "ion-ios-car",
-      },
-      {
-        text: "KOFEIINIKALKULAATOR",
-        path: "/kohv",
-        icon: "ion-ios-cafe",
-      },
-    ],
+    links: ["HOME", "PALGAKALKULAATOR", "KÜTUSEKALKULAATOR", "KOFEIINIKALKULAATOR"],
+    current: 0,
   }),
 };
 </script>
-
-<style lang="scss">
-@import "https://unpkg.com/ionicons@4.2.2/dist/css/ionicons.min.css";
-figure {
-  margin-block-start: 0;
-  margin-block-end: 0;
-  margin-inline-start: 10px;
-  margin-inline-end: 0;
-}
-body {
-  margin: 0;
-}
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-//mobiilvaates kõik asjad, mis soovime peita, anname klassi 'hidden'
-@media screen and (max-width: 759px) {
-  .hidden {
-    display: none;
-  }
-}
-</style>
+<style scoped></style>
