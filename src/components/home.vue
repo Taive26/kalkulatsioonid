@@ -1,9 +1,11 @@
 <template>
   <v-container>
     <v-row align="center" justify="center">
-      <div id="app" align="center">
-        <img class="home" src="@/assets/avaleht.png" alt="" /></div
-    ></v-row>
+      <v-col class="md-12">
+      <div id="app" align="center" >
+        <v-img class="home" src="@/assets/avakuva.png" alt="" /></div>
+        </v-col>
+        </v-row>
   </v-container>
 </template>
 <style scoped>

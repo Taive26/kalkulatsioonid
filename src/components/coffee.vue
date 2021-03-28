@@ -1,61 +1,81 @@
 <template>
   <v-container>
-    <!--
-PLAAN
-1) arvutada lethalDose kasutaja sisestatud kehamassi jaoks (200mg/kg kohta) - saab kasutaja surmava doosi
-2) arvutada caffeineConsumed vastavalt valitud kangusele 
-3) lethalDose - caffeineConsumed = caffeineTillDeath
-4) konvertida caffeineTillDeath tassideks ja KUVADA "Võid juua veel {{cupsTillDeath}} tassi "
--->
-    <v-row align="center" justify="center">
-      <v-col sm="4" md="4">
-        <v-row>
-          <div id="app" align="center">
-            <img
-              class="leftpane"
-              src="@/assets/tired.png"
-              alt="By Videoplasty.com, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=67046674"
-            /></div
-        ></v-row>
+    <v-row class="v-responsive content" align="center" justify="center">
+      <v-col cols="12" md="4">
+        <div id="app" align="center">
+          <img
+            class="leftpane"
+            src="@/assets/tired.png"
+            alt="By Videoplasty.com, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=67046674"
+          />
+        </div>
       </v-col>
-      <v-col sm="6" md="6" class="align-content-center">
+      <v-col cols="12" md="4" align="center" justify="center">
+        <v-row>
+          <v-text-field
+            v-model.number="cups"
+            hide-details="auto"
+            label="Mitu tassi oled joonud?"
+            type="number"
+            class="centered-input pa-4 secondary text-center rounded-pill mb-7 mx-auto"
+            align="center"
+            justify="center"
+            outlined
+          ></v-text-field>
+        </v-row>
+        <v-row>
+          <v-select
+            v-model="intensity"
+            hide-details="auto"
+            class="centered-input pa-4 secondary text-center rounded-pill mb-7 mx-auto"
+            :items="howIntense"
+            item-text="kind"
+            item-value="caffeine"
+            label="Kangus"
+            outlined
+          ></v-select>
+        </v-row>
+        <v-row>
+          <v-text-field
+            v-model="weight"
+            hide-details="auto"
+            type="number"
+            class="centered-input pa-4 secondary text-center rounded-pill mb-7 mx-auto"
+            label="Kehamass (kg)"
+            outlined
+          ></v-text-field>
+        </v-row>
+        <v-row align="center" justify="center">
+          <v-btn
+          class="ma-2 mb-7 mx-auto"
+          outlined
+          color="secondary"
+          align="center"
+          justify="center"
+          @click="calculateCoffee(cups, weight, intensity)"
+        > Arvuta
+        </v-btn>
+        </v-row>
+        
         <v-row
-          ><div>
-            <v-text-field
-              type="number"
-              label="Tarbitud tasside arv"
-              outlined
-            ></v-text-field></div
-        ></v-row>
-        <v-row
-          ><div>
-            <v-select
-              :items="intensity"
-              label="Kangus"
-              outlined
-            ></v-select></div
-        ></v-row>
-        <v-row
-          ><div>
-            <v-text-field
-              type="number"
-              label="Kehamass (kg)"
-              outlined
-            ></v-text-field></div
-        ></v-row>
-        <v-row class="mt-10">
-          <h2>Võid juua veel ... tassi</h2>
+          id="app"
+          alt="answer"
+          class="pa-15 primary rounded-circle d-inline-block"
+          align="center"
+          justify="center"
+        >
+          <button>{{ answer }}</button>
         </v-row>
       </v-col>
-      <v-col sm="1" md="1">
-        <v-row
-          ><div
-            id="app"
-            alt="coffee cups"
-            class="d-flex flex-column justify-space-between align-center"
-          >
-            <img class="rightpane" src="@/assets/kohvitassid.png" /></div
-        ></v-row>
+
+      <v-col cols="12" md="4">
+        <div
+          id="app"
+          alt="coffee cups"
+          class="d-flex flex-column justify-space-between align-center"
+        >
+          <img class="rightpane" src="@/assets/kohvitassid.png" />
+        </div>
       </v-col>
     </v-row>
   </v-container>
@@ -73,12 +93,37 @@ img.leftpane {
 <script>
 export default {
   name: "Coffee",
-  data: () => ({
-    intensity: [
-      "LAHJA PIIMALÜRBE (70 mg kofeiini)",
-      "TASAKAALUKAS HARILIK (150 mg kofeiini)",
-      "MUST KLEEPUV TÖKAT (300 mg kofeiini)",
-    ],
-  }),
+  data() {
+    return {
+      cups: 0,
+      weight: 0,
+      intensity: 0,
+      answer: null,
+      howIntense: [
+        { kind: "LAHJA PIIMALÜRBE (70 mg kofeiini)", caffeine: 70 },
+        { kind: "TASAKAALUKAS HARILIK (150 mg kofeiini)", caffeine: 150 },
+        { kind: "MUST KLEEPUV TÖKAT (300 mg kofeiini)", caffeine: 300 },
+      ],
+    };
+  },
+
+  methods: {
+    calculateCoffee(cups, weight, intensity) {
+      const lethalDoseInGrams = weight * 200;
+      const caffeineConsumed = intensity * cups;
+      const caffeineTillDeath = lethalDoseInGrams - caffeineConsumed;
+      const cupsTillDeath = (caffeineTillDeath / intensity).toFixed();
+      const answerToDisplay = cupsTillDeath - 1;
+      this.answer =
+        "Saaksid juua veel " + answerToDisplay + " tassi kohvi, enne kui...";
+
+      if (answerToDisplay === 1) {
+        this.answer = "Saaksid juua veel VIIMASE tassi kohvi, enne kui...";
+      }
+      if (answerToDisplay <= 0) {
+        this.answer = "Kas sa päriselt jõid nii palju kohvi? Oled kindel et hingad veel?";
+      }
+    },
+  },
 };
 </script>

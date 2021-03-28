@@ -153,7 +153,8 @@ export default {
       calculatePension: 0,
       salary: 0,
 
-      series: [3856, 80, 100, 964],
+      series: [],
+
       chartOptions: {
         chart: {
           width: 500,
@@ -165,7 +166,7 @@ export default {
         labels: ["Netopalk", "Töötuskindlustus", "Kogumispension", "Tulumaks"],
         responsive: [
           {
-            breakpoint: 480,
+            breakpoint: 2000,
             options: {
               chart: {
                 width: 350,
@@ -237,8 +238,8 @@ export default {
       const netopalk = salary;
       const sotsiaalmaks = salary * 0.33;
       const töötuskindlustus8 = salary * 0.008;
-      const töötuskindlustus16 = salary*0.016;
-      const pension = salary*0.02;
+      const töötuskindlustus16 = salary * 0.016;
+      const pension = salary * 0.02;
       const revenueToBeTaxed1 = salary - 500;
       const revenueToBeTaxed2 = +(
         salary -
@@ -299,6 +300,8 @@ export default {
         },
       ];
 
+      this.series = [netopalk, 0, 0, 0];
+
       if (this.calculateSM) {
         this.employerTableItems = [
           {
@@ -316,7 +319,7 @@ export default {
           },
           {
             itemName: "Sotsiaalmaks",
-            resultAsMoney: sotsiaalmaks,
+            resultAsMoney: +sotsiaalmaks.toFixed(2),
             resultAsPercent: +(
               (sotsiaalmaks / (salary + sotsiaalmaks)) *
               100
@@ -368,7 +371,7 @@ export default {
         this.employerTableItems = [
           {
             itemName: "Palgafond kokku",
-            resultAsMoney: salary + sotsiaalmaks + töötuskindlustus8,
+            resultAsMoney: +(salary + sotsiaalmaks + töötuskindlustus8).toFixed(2),
             resultAsPercent: 100,
           },
           {
@@ -381,7 +384,7 @@ export default {
           },
           {
             itemName: "Sotsiaalmaks",
-            resultAsMoney: sotsiaalmaks,
+            resultAsMoney: +sotsiaalmaks.toFixed(2),
             resultAsPercent: +(
               (sotsiaalmaks / (salary + sotsiaalmaks + töötuskindlustus8)) *
               100
@@ -389,7 +392,7 @@ export default {
           },
           {
             itemName: "Töötuskindlustus",
-            resultAsMoney: töötuskindlustus8,
+            resultAsMoney: +töötuskindlustus8.toFixed(2),
             resultAsPercent: +(
               (töötuskindlustus8 /
                 (salary + sotsiaalmaks + töötuskindlustus8)) *
@@ -431,6 +434,7 @@ export default {
               ).toFixed(2),
             },
           ];
+          this.series = [salary - taxOnRevenue1, 0, 0, taxOnRevenue1];
         }
         if (salary >= 1201 && salary <= 2099) {
           this.employeeTableItems = [
@@ -462,6 +466,12 @@ export default {
                 100
               ).toFixed(2),
             },
+          ];
+          this.series = [
+            +(salary - taxOnRevenue2).toFixed(2),
+            0,
+            0,
+            taxOnRevenue2,
           ];
         }
 
@@ -496,6 +506,12 @@ export default {
               ).toFixed(2),
             },
           ];
+          this.series = [
+            +(salary - taxOnRevenue3).toFixed(2),
+            0,
+            0,
+            taxOnRevenue3,
+          ];
         }
       }
 
@@ -509,7 +525,7 @@ export default {
           {
             itemName: "Töötuskindlustus",
             resultAsMoney: töötuskindlustus16,
-            resultAsPercent: +((töötuskindlustus16/salary)*100).toFixed(2),
+            resultAsPercent: +((töötuskindlustus16 / salary) * 100).toFixed(2),
           },
           {
             itemName: "Kogumispension",
@@ -530,6 +546,7 @@ export default {
             ).toFixed(2),
           },
         ];
+        this.series = [salary - töötuskindlustus16, töötuskindlustus16, 0, 0];
       }
 
       if (this.calculateTK16 && this.calculateTM) {
@@ -543,7 +560,9 @@ export default {
             {
               itemName: "Töötuskindlustus",
               resultAsMoney: töötuskindlustus16,
-              resultAsPercent: +((töötuskindlustus16/salary)*100).toFixed(2),
+              resultAsPercent: +((töötuskindlustus16 / salary) * 100).toFixed(
+                2
+              ),
             },
             {
               itemName: "Kogumispension",
@@ -557,12 +576,18 @@ export default {
             },
             {
               itemName: "Netopalk",
-              resultAsMoney: salary-töötuskindlustus16-taxOnRevenue1,
+              resultAsMoney: salary - töötuskindlustus16 - taxOnRevenue1,
               resultAsPercent: +(
-                ((salary-töötuskindlustus16-taxOnRevenue1) / salary) *
+                ((salary - töötuskindlustus16 - taxOnRevenue1) / salary) *
                 100
               ).toFixed(2),
             },
+          ];
+          this.series = [
+            salary - töötuskindlustus16 - taxOnRevenue1,
+            töötuskindlustus16,
+            0,
+            taxOnRevenue1,
           ];
         }
         if (salary >= 1201 && salary <= 2099) {
@@ -575,7 +600,9 @@ export default {
             {
               itemName: "Töötuskindlustus",
               resultAsMoney: töötuskindlustus16,
-              resultAsPercent: +((töötuskindlustus16/salary)*100).toFixed(2),
+              resultAsPercent: +((töötuskindlustus16 / salary) * 100).toFixed(
+                2
+              ),
             },
             {
               itemName: "Kogumispension",
@@ -589,12 +616,22 @@ export default {
             },
             {
               itemName: "Netopalk",
-              resultAsMoney: +(salary-töötuskindlustus16-taxOnRevenue2).toFixed(2),
+              resultAsMoney: +(
+                salary -
+                töötuskindlustus16 -
+                taxOnRevenue2
+              ).toFixed(2),
               resultAsPercent: +(
-                ((salary-töötuskindlustus16-taxOnRevenue2) / salary) *
+                ((salary - töötuskindlustus16 - taxOnRevenue2) / salary) *
                 100
               ).toFixed(2),
             },
+          ];
+          this.series = [
+            salary - töötuskindlustus16 - taxOnRevenue2,
+            töötuskindlustus16,
+            0,
+            taxOnRevenue2,
           ];
         }
 
@@ -608,7 +645,9 @@ export default {
             {
               itemName: "Töötuskindlustus",
               resultAsMoney: töötuskindlustus16,
-              resultAsPercent: +((töötuskindlustus16/salary)*100).toFixed(2),
+              resultAsPercent: +((töötuskindlustus16 / salary) * 100).toFixed(
+                2
+              ),
             },
             {
               itemName: "Kogumispension",
@@ -622,12 +661,22 @@ export default {
             },
             {
               itemName: "Netopalk",
-              resultAsMoney: +(salary-töötuskindlustus16-taxOnRevenue3).toFixed(2),
+              resultAsMoney: +(
+                salary -
+                töötuskindlustus16 -
+                taxOnRevenue3
+              ).toFixed(2),
               resultAsPercent: +(
-                ((salary-töötuskindlustus16-taxOnRevenue3) / salary) *
+                ((salary - töötuskindlustus16 - taxOnRevenue3) / salary) *
                 100
               ).toFixed(2),
             },
+          ];
+          this.series = [
+            salary - töötuskindlustus16 - taxOnRevenue3,
+            töötuskindlustus16,
+            0,
+            taxOnRevenue3,
           ];
         }
       }
@@ -647,7 +696,7 @@ export default {
           {
             itemName: "Kogumispension",
             resultAsMoney: pension,
-            resultAsPercent: +((pension/salary)*100).toFixed(2),
+            resultAsPercent: +((pension / salary) * 100).toFixed(2),
           },
           {
             itemName: "Tulumaks",
@@ -657,12 +706,10 @@ export default {
           {
             itemName: "Netopalk",
             resultAsMoney: salary - pension,
-            resultAsPercent: +(
-              ((salary - pension) / salary) *
-              100
-            ).toFixed(2),
+            resultAsPercent: +(((salary - pension) / salary) * 100).toFixed(2),
           },
         ];
+        this.series = [salary - pension, 0, pension, 0];
       }
 
       if (this.calculatePension && this.calculateTM) {
@@ -681,7 +728,7 @@ export default {
             {
               itemName: "Kogumispension",
               resultAsMoney: pension,
-              resultAsPercent: +((pension/salary)*100).toFixed(2),
+              resultAsPercent: +((pension / salary) * 100).toFixed(2),
             },
             {
               itemName: "Tulumaks",
@@ -690,12 +737,18 @@ export default {
             },
             {
               itemName: "Netopalk",
-              resultAsMoney: salary-pension-taxOnRevenue1,
+              resultAsMoney: salary - pension - taxOnRevenue1,
               resultAsPercent: +(
-                ((salary-pension-taxOnRevenue1) / salary) *
+                ((salary - pension - taxOnRevenue1) / salary) *
                 100
               ).toFixed(2),
             },
+          ];
+          this.series = [
+            salary - pension - taxOnRevenue1,
+            0,
+            pension,
+            taxOnRevenue1,
           ];
         }
         if (salary >= 1201 && salary <= 2099) {
@@ -713,7 +766,7 @@ export default {
             {
               itemName: "Kogumispension",
               resultAsMoney: pension,
-              resultAsPercent: +((pension/salary)*100).toFixed(2),
+              resultAsPercent: +((pension / salary) * 100).toFixed(2),
             },
             {
               itemName: "Tulumaks",
@@ -722,12 +775,18 @@ export default {
             },
             {
               itemName: "Netopalk",
-              resultAsMoney: +(salary-pension-taxOnRevenue2).toFixed(2),
+              resultAsMoney: +(salary - pension - taxOnRevenue2).toFixed(2),
               resultAsPercent: +(
-                ((salary-pension-taxOnRevenue2) / salary) *
+                ((salary - pension - taxOnRevenue2) / salary) *
                 100
               ).toFixed(2),
             },
+          ];
+          this.series = [
+            salary - pension - taxOnRevenue2,
+            0,
+            pension,
+            taxOnRevenue2,
           ];
         }
 
@@ -755,12 +814,18 @@ export default {
             },
             {
               itemName: "Netopalk",
-              resultAsMoney: +(salary-pension-taxOnRevenue3).toFixed(2),
+              resultAsMoney: +(salary - pension - taxOnRevenue3).toFixed(2),
               resultAsPercent: +(
-                ((salary-pension-taxOnRevenue3) / salary) *
+                ((salary - pension - taxOnRevenue3) / salary) *
                 100
               ).toFixed(2),
             },
+          ];
+          this.series = [
+            salary - pension - taxOnRevenue3,
+            0,
+            pension,
+            taxOnRevenue3,
           ];
         }
       }
@@ -775,12 +840,12 @@ export default {
           {
             itemName: "Töötuskindlustus",
             resultAsMoney: töötuskindlustus16,
-            resultAsPercent: +((töötuskindlustus16/salary)*100).toFixed(2),
+            resultAsPercent: +((töötuskindlustus16 / salary) * 100).toFixed(2),
           },
           {
             itemName: "Kogumispension",
             resultAsMoney: pension,
-            resultAsPercent: +((pension/salary)*100).toFixed(2),
+            resultAsPercent: +((pension / salary) * 100).toFixed(2),
           },
           {
             itemName: "Tulumaks",
@@ -789,12 +854,18 @@ export default {
           },
           {
             itemName: "Netopalk",
-            resultAsMoney: salary - pension-töötuskindlustus16,
+            resultAsMoney: salary - pension - töötuskindlustus16,
             resultAsPercent: +(
-              ((salary - pension-töötuskindlustus16) / salary) *
+              ((salary - pension - töötuskindlustus16) / salary) *
               100
             ).toFixed(2),
           },
+        ];
+        this.series = [
+          salary - pension - töötuskindlustus16,
+          töötuskindlustus16,
+          pension,
+          0,
         ];
       }
 
@@ -809,12 +880,14 @@ export default {
             {
               itemName: "Töötuskindlustus",
               resultAsMoney: töötuskindlustus16,
-            resultAsPercent: +((töötuskindlustus16/salary)*100).toFixed(2),
+              resultAsPercent: +((töötuskindlustus16 / salary) * 100).toFixed(
+                2
+              ),
             },
             {
               itemName: "Kogumispension",
               resultAsMoney: pension,
-              resultAsPercent: +((pension/salary)*100).toFixed(2),
+              resultAsPercent: +((pension / salary) * 100).toFixed(2),
             },
             {
               itemName: "Tulumaks",
@@ -823,12 +896,20 @@ export default {
             },
             {
               itemName: "Netopalk",
-              resultAsMoney: salary-pension-taxOnRevenue1-töötuskindlustus16,
+              resultAsMoney:
+                salary - pension - taxOnRevenue1 - töötuskindlustus16,
               resultAsPercent: +(
-                ((salary-pension-taxOnRevenue1-töötuskindlustus16) / salary) *
+                ((salary - pension - taxOnRevenue1 - töötuskindlustus16) /
+                  salary) *
                 100
               ).toFixed(2),
             },
+          ];
+          this.series = [
+            salary - pension - taxOnRevenue1 - töötuskindlustus16,
+            töötuskindlustus16,
+            pension,
+            taxOnRevenue1,
           ];
         }
         if (salary >= 1201 && salary <= 2099) {
@@ -841,12 +922,14 @@ export default {
             {
               itemName: "Töötuskindlustus",
               resultAsMoney: töötuskindlustus16,
-            resultAsPercent: +((töötuskindlustus16/salary)*100).toFixed(2),
+              resultAsPercent: +((töötuskindlustus16 / salary) * 100).toFixed(
+                2
+              ),
             },
             {
               itemName: "Kogumispension",
               resultAsMoney: pension,
-              resultAsPercent: +((pension/salary)*100).toFixed(2),
+              resultAsPercent: +((pension / salary) * 100).toFixed(2),
             },
             {
               itemName: "Tulumaks",
@@ -855,12 +938,24 @@ export default {
             },
             {
               itemName: "Netopalk",
-              resultAsMoney: +(salary-pension-taxOnRevenue2-töötuskindlustus16).toFixed(2),
+              resultAsMoney: +(
+                salary -
+                pension -
+                taxOnRevenue2 -
+                töötuskindlustus16
+              ).toFixed(2),
               resultAsPercent: +(
-                ((salary-pension-taxOnRevenue2-töötuskindlustus16) / salary) *
+                ((salary - pension - taxOnRevenue2 - töötuskindlustus16) /
+                  salary) *
                 100
               ).toFixed(2),
             },
+          ];
+          this.series = [
+            salary - pension - taxOnRevenue2 - töötuskindlustus16,
+            töötuskindlustus16,
+            pension,
+            taxOnRevenue2,
           ];
         }
 
@@ -874,12 +969,14 @@ export default {
             {
               itemName: "Töötuskindlustus",
               resultAsMoney: töötuskindlustus16,
-            resultAsPercent: +((töötuskindlustus16/salary)*100).toFixed(2),
+              resultAsPercent: +((töötuskindlustus16 / salary) * 100).toFixed(
+                2
+              ),
             },
             {
               itemName: "Kogumispension",
               resultAsMoney: pension,
-              resultAsPercent: +((pension/salary)*100).toFixed(2),
+              resultAsPercent: +((pension / salary) * 100).toFixed(2),
             },
             {
               itemName: "Tulumaks",
@@ -888,12 +985,24 @@ export default {
             },
             {
               itemName: "Netopalk",
-              resultAsMoney: +(salary-pension-taxOnRevenue3-töötuskindlustus16).toFixed(2),
+              resultAsMoney: +(
+                salary -
+                pension -
+                taxOnRevenue3 -
+                töötuskindlustus16
+              ).toFixed(2),
               resultAsPercent: +(
-                ((salary-pension-taxOnRevenue3-töötuskindlustus16) / salary) *
+                ((salary - pension - taxOnRevenue3 - töötuskindlustus16) /
+                  salary) *
                 100
               ).toFixed(2),
             },
+          ];
+          this.series = [
+            salary - pension - taxOnRevenue3 - töötuskindlustus16,
+            töötuskindlustus16,
+            pension,
+            taxOnRevenue3,
           ];
         }
       }
