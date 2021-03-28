@@ -149,7 +149,7 @@ export default {
       }
       if (answerToDisplay <= 0) {
         this.answer =
-          "Kas sa päriselt jõid nii palju kohvi? Oled kindel, et hingad veel?";
+          "Kas sa päriselt jõid nii palju kohvi? Oled kindel et hingad veel?";
       }
     },
   },
