@@ -71,12 +71,12 @@
         <h4 class="text-center font-weight-regular">
           Sinu brutopalk jaguneb nii:
         </h4>
-        <apexchart
+<!--         <apexchart
           type="pie"
           width="380"
           :options="chartOptions"
           :series="series"
-        ></apexchart>
+        ></apexchart> -->
       </v-col>
     </v-row>
     <v-simple-table class="mt-7 mb-7 mx-auto">

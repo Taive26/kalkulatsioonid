@@ -1,7 +1,22 @@
 <template>
   <v-container>
     <v-row class="mt-40">
-        <v-radio-group>
+      <div>
+                <v-text-field
+          label="Vali arvutus"
+          ref="options"
+          v-model="options"
+          id="options"
+          type="text"
+          class="form-control"
+          v-on:keyup="check"
+        >
+        </v-text-field>
+<!--         <select v-model="selected" class="form-control">
+          <option v-for="option in options">{{ option.name }}</option>
+        </select> -->
+      </div>
+      <!--         <v-radio-group>
           <v-radio 
             label="Teekonna pikkus"
             id="journeyLengthRadio"
@@ -26,7 +41,7 @@
             v-model="chooseCalculation"
             @click="isDisabled3 = !isDisabled3"
           ></v-radio>
-        </v-radio-group>
+        </v-radio-group> -->
 
       <v-col sm="12" md="4">
         <v-text-field
@@ -80,20 +95,30 @@
       </v-col>
       <v-col class="hidden">
         <div>
-        <select class="form-control">
-          <option v-for="unit in journeyUnits" :value="unit.code" :key="unit.code">
-            {{ unit.name }}</option>
-        </select>
+          <select class="form-control">
+            <option
+              v-for="unit in journeyUnits"
+              :value="unit.code"
+              :key="unit.code"
+            >
+              {{ unit.name }}</option
+            >
+          </select>
         </div>
         <div>
-        <select class="form-control">
-          <option v-for="unit in consumptionUnits" :value="unit.code" :key="unit.code">
-            {{ unit.name }}</option>
-        </select>
+          <select class="form-control">
+            <option
+              v-for="unit in consumptionUnits"
+              :value="unit.code"
+              :key="unit.code"
+            >
+              {{ unit.name }}</option
+            >
+          </select>
         </div>
-       <div>
-        <select class="chooseCalculation" ></select>
-       </div>
+        <div>
+          <select class="chooseCalculation"></select>
+        </div>
       </v-col>
     </v-row>
     <v-row class="mt-10">
@@ -118,26 +143,21 @@ export default {
     chooseCalculation: String
   },
 
-  /* 1. TeePikkus = KütuseKogus/KütuseKulu * 100
-2. KütuseKulu = KütuseKogus/TeePikkus * 100
-3. KütuseKogus = TeePikkus/100 * KütuseKulu */
-
-  fuelConsumption(fuelAmount, journeyLength) {
-    return (fuelAmount / journeyLength) * 100;
-  },
-
-  fuelAmount(journeyLength, fuelConsumption) {
-    return (journeyLength / 100) * fuelConsumption;
-  },
-
-
+  
   data() {
     return {
+      options: "",
       el: "#journeyLengthRadio",
+      // selected: "",
+/*       options: [
+        { name: "Teepikkus", id: 1, value: 1 },
+        { name: "Kütuse kulu", id: 2, value: 1.609344 },
+        { name: "Kütuse kogus", id: 3, value: 1.609344 }
+      ], */
       isDisabled1: false,
       isDisabled2: false,
       isDisabled3: false,
-/*       chooseCalculation: "journeyLength", */
+      /*       chooseCalculation: "journeyLength", */
       journeyUnits: [
         { name: "Kilomeeter (km)", id: 1, value: 1 },
         { name: "Miil (mi)", id: 2, value: 1.609344 }
@@ -175,22 +195,43 @@ export default {
       console.log(this.journeyLength);
       console.log(this.fuelConsumption);
       console.log(this.fuelAmount);
-      console.log(this.chooseCalculation);
-      console.log(this.$refs.journeyLength.checked);
+      console.log(this.options);
 
-/*       console.log(this.$refs.journeyLengthRadio.toggleChecked);
-      console.log(this.$refs.fuelConsumptionRadio.value);
-      console.log(this.$refs.fuelAmountRadio.value); */
-
-       this.journeyLength = this.journeyLengthCalculation(
+      if (this.options === "journeyLength") {
+        this.journeyLength = this.journeyLengthCalculation(
         this.fuelAmount,
         this.fuelConsumption
       );
+      }
+
+      if (this.options === "fuelConsumption") {
+        this.fuelConsumption = this.fuelConsumptionCalculation(
+        this.fuelAmount,
+        this.journeyLength
+      );
+      }
+      if (this.options === "fuelAmount") {
+        this.fuelAmount = this.fuelAmountCalculation(
+        this.journeyLength,
+        this.fuelConsumption
+      );
+      }
+
     },
 
     journeyLengthCalculation(fuelAmount, fuelConsumption) {
       return (fuelAmount / fuelConsumption) * 100;
-    }
+    },
+
+  fuelConsumptionCalculation(fuelAmount, journeyLength) {
+    return (fuelAmount / journeyLength) * 100;
+  },
+
+  fuelAmountCalculation(journeyLength, fuelConsumption) {
+    return (journeyLength / 100) * fuelConsumption;
+  },
+
+
   }
 };
 </script>
