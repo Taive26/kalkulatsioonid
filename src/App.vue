@@ -19,15 +19,12 @@
           <v-col cols="12" sm="12">
             <v-sheet min-height="70vh" rounded="lg">
               <div v-show="current === 0">
-                <home />
-              </div>
-              <div v-show="current === 1">
                 <salary />
               </div>
-              <div v-show="current === 2">
+              <div v-show="current === 1">
                 <fuel />
               </div>
-              <div v-show="current === 3">
+              <div v-show="current === 2">
                 <coffee /></div
             ></v-sheet>
           </v-col>
@@ -38,20 +35,18 @@
 </template>
 
 <script>
-import home from "@/views/Home";
 import salary from "@/views/Salary";
 import coffee from "@/views/Coffee";
 import fuel from "@/views/Fuel";
 export default {
   name: "App",
   components: {
-    home,
     salary,
     coffee,
     fuel,
   },
   data: () => ({
-    links: ["HOME", "PALGAKALKULAATOR", "KÜTUSEKALKULAATOR", "KOFEIINIKALKULAATOR"],
+    links: ["PALK", "KÜTUS", "KOHV"],
     current: 0,
   }),
 };

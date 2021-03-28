@@ -4,7 +4,7 @@
       <v-col cols="12" md="4">
         <div id="app" align="center">
           <img
-            class="leftpane"
+            class="leftpane hidden"
             src="@/assets/tired.png"
             alt="By Videoplasty.com, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=67046674"
           />
@@ -87,6 +87,12 @@ img.rightpane {
 }
 img.leftpane {
   width: 250px;
+}
+
+@media screen and (max-width: 759px) {
+  .hidden {
+    display: none;
+  }
 }
 </style>
 
