@@ -74,7 +74,7 @@
           alt="coffee cups"
           class="d-flex flex-column justify-space-between align-center"
         >
-          <img class="rightpane" src="@/assets/kohvitassid.png" />
+          <img class="rightpane" src="@/assets/coffee.png" />
         </div>
       </v-col>
     </v-row>
@@ -83,7 +83,7 @@
 
 <style scoped>
 img.rightpane {
-  width: 200px;
+  width: 350px;
 }
 img.leftpane {
   width: 250px;
