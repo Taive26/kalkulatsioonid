@@ -4,7 +4,7 @@
       <v-col cols="12" md="4">
         <div id="app" align="center">
           <img
-            class="leftpane"
+            class="leftpane hidden"
             src="@/assets/tired.png"
             alt="By Videoplasty.com, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=67046674"
           />
@@ -95,6 +95,20 @@ img.rightpane {
 img.leftpane {
   width: 250px;
 }
+
+@media screen and (max-width: 759px) {
+  .hidden {
+    display: none;
+  }
+
+  .mt-40 {
+    margin-top: 0px;
+  }
+
+  .row{
+    margin-top: 0px;
+  }
+}
 </style>
 
 <script>
@@ -107,9 +121,9 @@ export default {
       intensity: 0,
       answer: null,
       howIntense: [
-        { kind: "LAHJA PIIMALÜRBE (70 mg kofeiini)", caffeine: 70 },
-        { kind: "TASAKAALUKAS HARILIK (150 mg kofeiini)", caffeine: 150 },
-        { kind: "MUST KLEEPUV TÖKAT (300 mg kofeiini)", caffeine: 300 },
+        { kind: "LAHJA PIIMALÜRBE", caffeine: 70 },
+        { kind: "TASAKAALUKAS HARILIK", caffeine: 150 },
+        { kind: "MUST KLEEPUV TÖKAT", caffeine: 300 },
       ],
     };
   },
@@ -130,9 +144,8 @@ export default {
       const answerToDisplay = cupsTillDeath - 1;
       this.answer =
         "SAAKSID JUUA VEEL " + answerToDisplay + " TASSI KOHVI, ENNE KUI...";
-
       if (answerToDisplay === 1) {
-        this.answer = "Saaksid juua veel VIIMASE tassi kohvi, enne kui...";
+        this.answer = "Saaksid juua veel VIIMASE tassi kohvi, enne kui silme eest must";
       }
       if (answerToDisplay <= 0) {
         this.answer =

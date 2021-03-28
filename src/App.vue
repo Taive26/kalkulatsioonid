@@ -46,7 +46,7 @@ export default {
     fuel,
   },
   data: () => ({
-    links: ["PALGAKALKULAATOR", "KÜTUSEKALKULAATOR", "KOFEIINIKALKULAATOR"],
+    links: ["PALK", "KÜTUS", "KOHV"],
     current: 0,
   }),
 };
