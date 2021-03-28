@@ -1,59 +1,70 @@
 <template>
   <v-container>
     <v-row class="mt-40">
-      <v-col sm="12" md="4" align="center" justify="center">
-        <v-radio-group v-model="column" column>
-          <v-radio
+        <v-radio-group>
+          <v-radio 
             label="Teekonna pikkus"
-            value="radio-1"
+            id="journeyLengthRadio"
+            value="journeyLength"
+            ref="journeyLength"
+            v-model="chooseCalculation"
             @click="isDisabled1 = !isDisabled1"
           ></v-radio>
-          <v-radio
+          <v-radio 
             label="Kütuse kulu"
-            value="radio-2"
+            id="fuelConsumptionRadio"
+            ref="fuelConsumptionRadio"
+            value="fuelConsumption"
+            v-model="chooseCalculation"
             @click="isDisabled2 = !isDisabled2"
           ></v-radio>
           <v-radio
             label="Kütuse kogus"
-            value="radio-3"
+            id="fuelAmountRadio"
+            ref="fuelAmountRadio"
+            value="fuelAmount"
+            v-model="chooseCalculation"
             @click="isDisabled3 = !isDisabled3"
           ></v-radio>
         </v-radio-group>
-      </v-col>
+
       <v-col sm="12" md="4">
         <v-text-field
           label="Teekonna pikkus"
+          ref="journeyLength"
           :disabled="isDisabled1"
           v-model.trim="journeyLength"
           id="journeyLength"
           name="journeyLength"
           type="number"
           class="form-control"
-          v-on:click="check"
+          v-on:keyup="check"
           filled
         >
         </v-text-field>
         <v-text-field
           label="Keskmine kütusekulu"
+          ref="fuelConsumption"
           :disabled="isDisabled2"
           v-model.trim="fuelConsumption"
           id="fuelConsumption"
           name="fuelConsumption"
           type="number"
           class="form-control"
-          v-on:click="check"
+          v-on:keyup="check"
           filled
         >
         </v-text-field>
         <v-text-field
           label="Kütuse kogus"
+          ref="fuelAmount"
           :disabled="isDisabled3"
           v-model.trim="fuelAmount"
           id="fuelAmount"
           name="fuelAmount"
           type="number"
           class="form-control"
-          v-on:click="check"
+          v-on:keyup="check"
           filled
         >
         </v-text-field>
@@ -67,17 +78,22 @@
         >
         </v-text-field>
       </v-col>
-      <v-col md="4" class="hidden">
-        <v-select class="form-control">
-        <option v-for="name in journeyUnits" :value="journeyUnits.value" :key="name"></option>
-        </v-select>
-        <v-select :items="consumptionUnits" label="Liitrit/100km" outlined>
-        </v-select>
-        <v-select :items="fuelUnits" label="Liiter(l)" outlined></v-select>
+      <v-col class="hidden">
+        <div>
         <select class="form-control">
-          <option
-            v-for="country in countries" :value="country.code" :key="country.code" >{{ country.name }}</option>
+          <option v-for="unit in journeyUnits" :value="unit.code" :key="unit.code">
+            {{ unit.name }}</option>
         </select>
+        </div>
+        <div>
+        <select class="form-control">
+          <option v-for="unit in consumptionUnits" :value="unit.code" :key="unit.code">
+            {{ unit.name }}</option>
+        </select>
+        </div>
+       <div>
+        <select class="chooseCalculation" ></select>
+       </div>
       </v-col>
     </v-row>
     <v-row class="mt-10">
@@ -99,6 +115,7 @@ export default {
   name: "Fuel",
   props: {
     msg: String,
+    chooseCalculation: String
   },
 
   /* 1. TeePikkus = KütuseKogus/KütuseKulu * 100
@@ -113,33 +130,36 @@ export default {
     return (journeyLength / 100) * fuelConsumption;
   },
 
+
   data() {
     return {
+      el: "#journeyLengthRadio",
       isDisabled1: false,
       isDisabled2: false,
       isDisabled3: false,
-      countries: [
-        { code: "GB", name: "Great Britain" },
-        { code: "US", name: "United States" },
-        { code: "KZ", name: "Kazakhstan" },
-      ],
-      selectedCountry: null,
+/*       chooseCalculation: "journeyLength", */
       journeyUnits: [
         { name: "Kilomeeter (km)", id: 1, value: 1 },
-        { name: "Miil (mi)", id: 2, value: 1.609344 },
+        { name: "Miil (mi)", id: 2, value: 1.609344 }
+      ],
+      consumptionUnits: [
+        { name: "Liitrit / 100 km", id: 1, value: 1 },
+        { name: "Liitrit / 100 mi", id: 2, value: 1.609344 }
+      ],
+      fuelUnits: [
+        { name: "Liiter (L)", id: 1, value: 1 },
+        { name: "US gallon (liquid gal)", id: 2, value: 1.609344 }
       ],
       journeyLength: 1200,
       fuelConsumption: 5.7,
       fuelAmount: 68.4,
-      fuelCost: 1.3,
-      consumptionUnits: ["Liitrit/100km"],
-      fuelUnits: ["Liiter(l)"],
+      fuelCost: 1.3
     };
   },
   computed: {
     result() {
       return this.sum(this.journeyLength, this.fuelConsumption, this.fuelCost);
-    },
+    }
   },
   methods: {
     sum(journeyLength, fuelConsumption, fuelCost) {
@@ -151,9 +171,18 @@ export default {
       }
     },
 
-    check: function(event) {
-      alert(event.target.tagName);
-      return this.journeyLengthCalculation(
+    check: function() {
+      console.log(this.journeyLength);
+      console.log(this.fuelConsumption);
+      console.log(this.fuelAmount);
+      console.log(this.chooseCalculation);
+      console.log(this.$refs.journeyLength.checked);
+
+/*       console.log(this.$refs.journeyLengthRadio.toggleChecked);
+      console.log(this.$refs.fuelConsumptionRadio.value);
+      console.log(this.$refs.fuelAmountRadio.value); */
+
+       this.journeyLength = this.journeyLengthCalculation(
         this.fuelAmount,
         this.fuelConsumption
       );
@@ -161,7 +190,7 @@ export default {
 
     journeyLengthCalculation(fuelAmount, fuelConsumption) {
       return (fuelAmount / fuelConsumption) * 100;
-    },
-  },
+    }
+  }
 };
 </script>
