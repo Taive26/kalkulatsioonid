@@ -2,7 +2,7 @@
   <v-container>
     <v-row class="mt-40">
       <div>
-                <v-text-field
+        <v-text-field
           label="Vali arvutus"
           ref="options"
           v-model="options"
@@ -12,7 +12,7 @@
           v-on:keyup="check"
         >
         </v-text-field>
-<!--         <select v-model="selected" class="form-control">
+        <!--         <select v-model="selected" class="form-control">
           <option v-for="option in options">{{ option.name }}</option>
         </select> -->
       </div>
@@ -140,16 +140,15 @@ export default {
   name: "Fuel",
   props: {
     msg: String,
-    chooseCalculation: String
+    chooseCalculation: String,
   },
 
-  
   data() {
     return {
       options: "",
       el: "#journeyLengthRadio",
       // selected: "",
-/*       options: [
+      /*       options: [
         { name: "Teepikkus", id: 1, value: 1 },
         { name: "Kütuse kulu", id: 2, value: 1.609344 },
         { name: "Kütuse kogus", id: 3, value: 1.609344 }
@@ -160,26 +159,26 @@ export default {
       /*       chooseCalculation: "journeyLength", */
       journeyUnits: [
         { name: "Kilomeeter (km)", id: 1, value: 1 },
-        { name: "Miil (mi)", id: 2, value: 1.609344 }
+        { name: "Miil (mi)", id: 2, value: 1.609344 },
       ],
       consumptionUnits: [
         { name: "Liitrit / 100 km", id: 1, value: 1 },
-        { name: "Liitrit / 100 mi", id: 2, value: 1.609344 }
+        { name: "Liitrit / 100 mi", id: 2, value: 1.609344 },
       ],
       fuelUnits: [
         { name: "Liiter (L)", id: 1, value: 1 },
-        { name: "US gallon (liquid gal)", id: 2, value: 1.609344 }
+        { name: "US gallon (liquid gal)", id: 2, value: 1.609344 },
       ],
       journeyLength: 1200,
       fuelConsumption: 5.7,
       fuelAmount: 68.4,
-      fuelCost: 1.3
+      fuelCost: 1.3,
     };
   },
   computed: {
     result() {
       return this.sum(this.journeyLength, this.fuelConsumption, this.fuelCost);
-    }
+    },
   },
   methods: {
     sum(journeyLength, fuelConsumption, fuelCost) {
@@ -199,39 +198,36 @@ export default {
 
       if (this.options === "journeyLength") {
         this.journeyLength = this.journeyLengthCalculation(
-        this.fuelAmount,
-        this.fuelConsumption
-      );
+          this.fuelAmount,
+          this.fuelConsumption
+        );
       }
 
       if (this.options === "fuelConsumption") {
         this.fuelConsumption = this.fuelConsumptionCalculation(
-        this.fuelAmount,
-        this.journeyLength
-      );
+          this.fuelAmount,
+          this.journeyLength
+        );
       }
       if (this.options === "fuelAmount") {
         this.fuelAmount = this.fuelAmountCalculation(
-        this.journeyLength,
-        this.fuelConsumption
-      );
+          this.journeyLength,
+          this.fuelConsumption
+        );
       }
-
     },
 
     journeyLengthCalculation(fuelAmount, fuelConsumption) {
       return (fuelAmount / fuelConsumption) * 100;
     },
 
-  fuelConsumptionCalculation(fuelAmount, journeyLength) {
-    return (fuelAmount / journeyLength) * 100;
+    fuelConsumptionCalculation(fuelAmount, journeyLength) {
+      return (fuelAmount / journeyLength) * 100;
+    },
+
+    fuelAmountCalculation(journeyLength, fuelConsumption) {
+      return (journeyLength / 100) * fuelConsumption;
+    },
   },
-
-  fuelAmountCalculation(journeyLength, fuelConsumption) {
-    return (journeyLength / 100) * fuelConsumption;
-  },
-
-
-  }
 };
 </script>
