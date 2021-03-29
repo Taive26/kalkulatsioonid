@@ -10,17 +10,17 @@ export default new Vuex.Store({
   },
   mutations: {
     countClicks(state) {
-      state.count++
+      state.count++;
     },
     savePreviousCups(state, cups) {
-      state.cups = cups
+      state.cups = cups;
     }
   },
   getters: {
     cups: state => state.cups
   },
   actions: {
-    countClicks: ({ commit }) => commit('countClicks')
+    countClicks: ({ commit }) => commit("countClicks")
   },
   modules: {}
 });

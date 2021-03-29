@@ -1,6 +1,6 @@
 <template>
   <div>
-  <salary />
+    <salary />
   </div>
 </template>
 

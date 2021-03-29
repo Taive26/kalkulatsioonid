@@ -1,5 +1,5 @@
 <template>
-<div><Fuel /></div>
+  <div><Fuel /></div>
 </template>
 
 <script>
@@ -8,6 +8,6 @@ export default {
   name: "KÜTUSEKALKULAATOR",
   components: {
     Fuel
-  },
+  }
 };
 </script>

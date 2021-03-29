@@ -7,18 +7,18 @@ const routes = [
   {
     path: "/palk",
     name: "Palgakalkulaator",
-    component: () => import("../views/Salary.vue"),
+    component: () => import("../views/Salary.vue")
   },
   {
     path: "/kytus",
     name: "Kütusekalkulaator",
-    component: () => import("../views/Fuel.vue"),
+    component: () => import("../views/Fuel.vue")
   },
   {
     path: "/kohv",
     name: "Kofeiinikalkulaator",
-    component: () => import("../views/Coffee.vue"),
-  },
+    component: () => import("../views/Coffee.vue")
+  }
 ];
 
 const router = new VueRouter({
