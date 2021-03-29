@@ -1,8 +1,5 @@
 // Imports
 import HelloWorld from "@/components/HelloWorld.vue";
-import coffee from "@/components/coffee.vue";
-import fuel from "@/components/fuel.vue";
-import salary from "@/components/salary.vue";
 import Vuetify from "vuetify";
 
 // Utilities

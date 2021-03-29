@@ -1,5 +1,5 @@
 <template>
-    <v-container class="secondary">
+    <v-container class="secondary v-responsive content">
       <v-row class="mt-40 centered-input rounded-pill center">
         <img
           class="leftpane-mob leftpane"
