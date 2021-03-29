@@ -12,7 +12,7 @@
       <v-col cols="12" md="4" align="center" justify="center">
         <v-row>
           <v-text-field
-            v-model.number="cups"
+            input v-model.number="cups"
             hide-details="auto"
             label="Mitu tassi oled joonud?"
             type="number"
@@ -115,7 +115,6 @@ export default {
   name: "Coffee",
   data() {
     return {
-      cups: 0,
       weight: 0,
       intensity: 0,
       answer: null,
@@ -130,8 +129,20 @@ export default {
     count() {
       return this.$store.state.count;
     },
+   cups: {
+    get () {
+      return this.$store.state.cups
+    },
+    set (value) {
+      this.$store.commit('savePreviousCups', value)
+    }
+  }
   },
   methods: {
+changeCups(event) {
+this.$store.commit('savePreviousCups', event.target.value)
+},
+
     updateCount() {
       this.$store.commit("countClicks");
     },

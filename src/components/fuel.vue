@@ -158,10 +158,10 @@ export default {
     return {
       options: String,
       radioBoxOption: String,
-      journeyLength: 1200,
-      fuelConsumption: 5.7,
-      fuelAmount: 68.4,
-      fuelCost: 1.3,
+      journeyLength: 0,
+      fuelConsumption: 0,
+      fuelAmount: 0,
+      fuelCost: 0,
     };
   },
   computed: {
