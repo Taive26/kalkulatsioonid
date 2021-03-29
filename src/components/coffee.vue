@@ -142,9 +142,9 @@ export default {
       const cupsTillDeath = (caffeineTillDeath / intensity).toFixed();
       const answerToDisplay = cupsTillDeath - 1;
       this.answer =
-        "SAAKSID JUUA VEEL " + answerToDisplay + " TASSI KOHVI, ENNE KUI...";
+        "SAAKSID JUUA VEEL " + answerToDisplay + " TASSI KOHVI, ENNE KUI MULLA-MATI KÜLASTAB";
       if (answerToDisplay === 1) {
-        this.answer = "Saaksid juua veel VIIMASE tassi kohvi, enne kui silme eest must";
+        this.answer = "Saaksid juua veel VIIMASE tassi kohvi, enne kui Mulla-Mati tuleb";
       }
       if (answerToDisplay <= 0) {
         this.answer =
