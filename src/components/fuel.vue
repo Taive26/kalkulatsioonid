@@ -22,6 +22,7 @@
               name="options"
               @change="onChange($event)"
               value="fuelConsumption"
+              checked
             />Kütuse kulu
           </v-row>
           <v-row class="pa-2 primary rounded-pill row-space">
