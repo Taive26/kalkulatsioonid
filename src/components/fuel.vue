@@ -1,95 +1,93 @@
 <template>
-    <v-container class="secondary v-responsive content">
-      <v-row class="mt-40 centered-input rounded-pill center">
-        
-        <img
-          class="leftpane-mob leftpane"
-          src="@/assets/fuelgauge.png"
-          alt="By Videoplasty.com, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=67046674"
-        />
+  <v-container class="secondary v-responsive content">
+    <v-row class="mt-40 centered-input rounded-pill center">
+      <v-col xs="12" sm="6" md="4" lg="4" class="radiobuttons">
+        <v-row class="pa-2 primary rounded-pill row-space">
+          <input
+            type="radio"
+            name="options"
+            @change="onChange($event)"
+            value="journeyLength"
+          />Teepikkus
+        </v-row>
+        <v-row class="pa-2 primary rounded-pill row-space">
+          <input
+            type="radio"
+            name="options"
+            @change="onChange($event)"
+            value="fuelConsumption"
+          />Kütuse kulu
+        </v-row>
+        <v-row class="pa-2 primary rounded-pill row-space">
+          <input
+            type="radio"
+            name="options"
+            @change="onChange($event)"
+            value="fuelAmount"
+          />Kütuse kogus
+        </v-row>
+        <v-row class="pa-2 primary rounded-pill row-space">
+          <h4 align="center" justify="center">Kütuse hind: {{ result }} EUR</h4>
+        </v-row>
+        <v-row align="center" justify="center" xs="12" sm="6">
+          <img
+            class="leftpane-mob leftpane"
+            src="@/assets/fuelgauge.png"
+            alt="By Videoplasty.com, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=67046674"
+          />
+        </v-row>
+      </v-col>
 
-        <v-col xs="12" sm="6" md="4" lg="4" class="radiobuttons">
-          <v-row class="pa-2 primary rounded-pill row-space">
-            <input
-              type="radio"
-              name="options"
-              @change="onChange($event)"
-              value="journeyLength"
-            />Teepikkus
-          </v-row>
-          <v-row class="pa-2 primary rounded-pill row-space">
-            <input
-              type="radio"
-              name="options"
-              @change="onChange($event)"
-              value="fuelConsumption"
-            />Kütuse kulu
-          </v-row>
-          <v-row class="pa-2 primary rounded-pill row-space">
-            <input
-              type="radio"
-              name="options"
-              @change="onChange($event)"
-              value="fuelAmount"
-            />Kütuse kogus
-          </v-row>
-          <v-row class="pa-2 primary rounded-pill row-space">
-            <h4 align="center" justify="center">
-              Kütuse hind: {{ result }} EUR
-            </h4>
-          </v-row>
-        </v-col>
-
-        <v-col sm="12" md="4" class="textboxes">
-          <v-text-field
-            label="Teekonna pikkus"
-            ref="journeyLength"
-            v-model.trim="journeyLength"
-            id="journeyLength"
-            name="journeyLength"
-            type="number"
-            class="form-control primary rounded-pill center"
-            v-on:keyup="check"
-            filled
-          >
-          </v-text-field>
-          <v-text-field
-            label="Keskmine kütusekulu"
-            ref="fuelConsumption"
-            v-model.trim="fuelConsumption"
-            id="fuelConsumption"
-            name="fuelConsumption"
-            type="number"
-            class="form-control primary rounded-pill"
-            v-on:keyup="check"
-            filled
-          >
-          </v-text-field>
-          <v-text-field
-            label="Kütuse kogus"
-            ref="fuelAmount"
-            v-model.trim="fuelAmount"
-            id="fuelAmount"
-            name="fuelAmount"
-            type="number"
-            class="form-control primary rounded-pill"
-            v-on:keyup="check"
-            filled
-          >
-          </v-text-field>
-          <v-text-field
-            label="Kütuseühiku hind"
-            v-model.trim="fuelCost"
-            type="number"
-            filled
-            id="fuelCost"
-            name="fuelCost"
-            class="primary rounded-pill"
-          >
-          </v-text-field>
-        </v-col>
-      </v-row>
-    </v-container>
+      <v-col sm="12" md="4" class="textboxes">
+        <v-text-field
+          label="Teekonna pikkus"
+          ref="journeyLength"
+          v-model.trim="journeyLength"
+          id="journeyLength"
+          name="journeyLength"
+          type="number"
+          class="form-control primary rounded-pill center"
+          v-on:keyup="check"
+          filled
+        >
+        </v-text-field>
+        <v-text-field
+          label="Keskmine kütusekulu"
+          ref="fuelConsumption"
+          v-model.trim="fuelConsumption"
+          id="fuelConsumption"
+          name="fuelConsumption"
+          type="number"
+          class="form-control primary rounded-pill"
+          v-on:keyup="check"
+          filled
+        >
+        </v-text-field>
+        <v-text-field
+          label="Kütuse kogus"
+          ref="fuelAmount"
+          v-model.trim="fuelAmount"
+          id="fuelAmount"
+          name="fuelAmount"
+          type="number"
+          class="form-control primary rounded-pill"
+          v-on:keyup="check"
+          filled
+        >
+        </v-text-field>
+        <v-text-field
+          label="Kütuseühiku hind"
+          v-model.trim="fuelCost"
+          type="number"
+          filled
+          id="fuelCost"
+          name="fuelCost"
+          class="primary rounded-pill"
+        >
+        </v-text-field>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <style scoped>
@@ -118,21 +116,47 @@ input[type="radio"] {
 }
 
 img.leftpane {
-  width: 30%;
-  height: 30%;
+  width: 100%;
+  height: auto;
 }
 
-@media screen and (max-width: 759px) {
-  .hidden {
-    display: none;
-  }
+img.secret {
+  display: none;
+}
 
+@media screen and (max-width: 959px) {
   .mt-40 {
     margin-top: 0px;
+    padding-left: 15px;
+  }
+
+  .radiobuttons {
+  margin: auto;
+  width: 30%;
+  padding-top: 0px;
+  padding: 10px;
+  font-size: 1.25rem;
+}
+
+.row-space {
+  margin-top: 0px;
+}
+
+  img.leftpane-mob {
+    width: 0.2%;
+    height: auto;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+  .mt-40 {
+    margin-top: 0px;
+    padding-left: 15px;
   }
 
   img.leftpane-mob {
-    width: 56%;
+    width: 0.2%;
     height: auto;
   }
 
@@ -142,6 +166,37 @@ img.leftpane {
 
   .row-space {
     margin-top: 0px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .mt-40 {
+    padding-top: 5px;
+    padding-left: 15px;
+  }
+
+  img.leftpane-mob {
+    width: 89%;
+    height: auto;
+  }
+
+  input[type="radio"] {
+    margin-right: 0px;
+  }
+
+  .row-space {
+    margin-top: 0px;
+  }
+}
+
+@media screen and (max-width: 461px) {
+  .mt-40 {
+    margin-top: 0px;
+    padding-left: 15px;
+  }
+  img.leftpane-mob {
+    width: 100%;
+    height: auto;
   }
 }
 </style>

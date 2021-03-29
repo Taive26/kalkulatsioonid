@@ -1,27 +1,28 @@
-import Vuex from 'vuex'
-import { shallow, createLocalVue } from 'vue-test-utils'
-import Mutations from './Mutations.vue'
-const localVue = createLocalVue()
-localVue.use(Vuex)
-describe('Mutations', () => {
-  let store
-  let mutations
+import Vuex from "vuex";
+import { shallowMount, createLocalVue } from "vue-test-utils";
+import Coffee from "@/components/coffee.vue";
+
+const localVue = createLocalVue();
+localVue.use(Vuex);
+
+describe("Coffee", () => {
+  let store;
+  let mutations;
   beforeEach(() => {
     mutations = {
-      MUTATION: jest.fn()
-    }
+      MUTATION: jest.fn(),
+    };
     store = new Vuex.Store({
-      mutations
-    })
-  })
-it('commits a MUTATION type mutation when a button is clicked', () => {
-    const wrapper = shallow(Mutations, {
+      mutations,
+    });
+  });
+  it("commits a MUTATION type mutation when a button is clicked", () => {
+    const wrapper = shallowMount(Coffee, {
       store,
-      localVue
-    })
-    wrapper.find('button').trigger('click')
-    expect(mutations.MUTATION.mock.calls).toHaveLength(1)
-    expect(mutations.MUTATION.mock.calls[0][1])
-      .toEqual({ val: 'val' })
-  })
-})
+      localVue,
+    });
+    wrapper.find("button").trigger("click");
+    expect(mutations.MUTATION.mock.calls).toHaveLength(1);
+    expect(mutations.MUTATION.mock.calls[0][1]).toEqual({ count: "1" });
+  });
+});
