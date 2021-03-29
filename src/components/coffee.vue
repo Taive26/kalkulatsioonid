@@ -145,13 +145,13 @@ export default {
       this.answer =
         "SAAKSID JUUA VEEL " + answerToDisplay + " TASSI KOHVI, ENNE KUI MULLA-MATI KÜLASTAB";
       if (answerToDisplay === 1) {
-        this.answer = "Saaksid juua veel VIIMASE tassi kohvi, enne kui Mulla-Mati tuleb";
+        this.answer = "Saaksid juua veel VIIMASE tassi kohvi, enne kui igavene pimedus saabub";
       }
       if (answerToDisplay <= 0) {
         this.answer =
-          "Kas sa päriselt jõid nii palju kohvi? Oled kindel et hingad veel?";
+          "Kas sa päriselt jõid nii palju kohvi? Oled juba teispoolsuses?";
       }
-    },
-  },
+    }
+  }
 };
 </script>

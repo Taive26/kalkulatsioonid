@@ -1,9 +1,8 @@
 // Imports
 import Fuel from "@/components/fuel.vue";
-import Vuetify from "vuetify";
 
 // Utilities
-import { createLocalVue, shallowMount } from "@vue/test-utils";
+import { shallowMount } from "@vue/test-utils";
 
 describe("fuel.vue", () => {
   const wrapper = shallowMount(Fuel)
