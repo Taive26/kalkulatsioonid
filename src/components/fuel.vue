@@ -1,5 +1,5 @@
 <template>
-    <v-container class="secondary">
+    <v-container class="secondary v-responsive content">
       <v-row class="mt-40 centered-input rounded-pill center">
         
         <img
@@ -158,10 +158,10 @@ export default {
     return {
       options: String,
       radioBoxOption: String,
-      journeyLength: 1200,
-      fuelConsumption: 5.7,
-      fuelAmount: 68.4,
-      fuelCost: 1.3,
+      journeyLength: 0,
+      fuelConsumption: 0,
+      fuelAmount: 0,
+      fuelCost: 0,
     };
   },
   computed: {
