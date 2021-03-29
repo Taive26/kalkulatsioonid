@@ -1,6 +1,7 @@
 <template>
     <v-container class="secondary">
       <v-row class="mt-40 centered-input rounded-pill center">
+        
         <img
           class="leftpane-mob leftpane"
           src="@/assets/fuelgauge.png"
@@ -157,18 +158,6 @@ export default {
     return {
       options: String,
       radioBoxOption: String,
-      journeyUnits: [
-        { name: "Kilomeeter (km)", id: 1, value: 1 },
-        { name: "Miil (mi)", id: 2, value: 1.609344 },
-      ],
-      consumptionUnits: [
-        { name: "Liitrit / 100 km", id: 1, value: 1 },
-        { name: "Liitrit / 100 mi", id: 2, value: 1.609344 },
-      ],
-      fuelUnits: [
-        { name: "Liiter (L)", id: 1, value: 1 },
-        { name: "US gallon (liquid gal)", id: 2, value: 1.609344 },
-      ],
       journeyLength: 1200,
       fuelConsumption: 5.7,
       fuelAmount: 68.4,

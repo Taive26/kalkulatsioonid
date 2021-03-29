@@ -5,40 +5,42 @@ import Vuetify from "vuetify";
 // Utilities
 import { createLocalVue, shallowMount } from "@vue/test-utils";
 
-//fuel komponent
-describe("fuel.vue", () => { // Nimetus - komponendi nimi
+describe("fuel.vue", () => {
+  const wrapper = shallowMount(Fuel)
+  const vm = wrapper.vm
 
-  const localVue = createLocalVue();
-  let vuetify;
-
-  // Siia panna kõik, mida peaks tegema enne iga testi jooksutamist
-  beforeEach(() => {
-    vuetify = new Vuetify();
+  test("testing setup correctly", () => {
+    expect(true).toBe(true);
   });
 
-  it("should calculate fuelPrice properly", () => {
-    const wrapper = shallowMount(Fuel,{});
-    const total = wrapper.vm.add(20, 5)//vue test util properties all, on mingi vm property, millega saab meetoditele ligi
-    expect(total).toBe(25);
+  it("calculates fuel price properly", () => {
+    const total= wrapper.vm.sum(20, 20, 20);
+    expect(total).toBe(80);
     expect(total).not.toBe(26);
   });
 
-  it("should calculate fuelAmount properly", () => {
+/*   it("calculates fuel price properly", () => {
+    const wrapper = shallowMount(Fuel, {});
+    const total= sum(20, 20, 20);
+    expect(total).toBe(80);
+    expect(total).not.toBe(26);
+  }); */
+
+  /* it("calculates journeyLength properly", () => {
     const wrapper = shallowMount(Fuel,{});
-    const total = wrapper.vm.multiply(20, 5)//vue test util properties all, on mingi vm property, millega saab meetoditele ligi
+    const total = wrapper.vm.multiply(20, 5)
     expect(total).toBe(100);
   });
 
-  it("should calculate fuelConsumption properly", () => {
+  it("calculates fuelConsumption properly", () => {
     const wrapper = shallowMount(Fuel,{});
-    const total = wrapper.vm.multiply(20, 5)//vue test util properties all, on mingi vm property, millega saab meetoditele ligi
+    const total = wrapper.vm.multiply(20, 5)
     expect(total).toBe(100);
   });
 
-  it("should calculate journeyLength properly", () => {
+  it("calculates fuelAmount properly", () => {
     const wrapper = shallowMount(Fuel,{});
-    const total = wrapper.vm.multiply(20, 5)//vue test util properties all, on mingi vm property, millega saab meetoditele ligi
+    const total = wrapper.vm.multiply(20, 5)
     expect(total).toBe(100);
-  });
-
+  }); */
 });
