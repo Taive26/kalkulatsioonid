@@ -237,11 +237,6 @@ export default {
       }
     },
     check: function() {
-      console.log(this.journeyLength);
-      console.log(this.fuelConsumption);
-      console.log(this.fuelAmount);
-      console.log(this.options);
-
       if (this.options === "journeyLength") {
         this.journeyLength = this.journeyLengthCalculation(
           this.fuelAmount,
