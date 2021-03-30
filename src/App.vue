@@ -48,12 +48,12 @@ export default {
     home,
     salary,
     coffee,
-    fuel,
+    fuel
   },
   data: () => ({
-    links: ["HOME", "PALGAKALKULAATOR", "KÜTUSEKALKULAATOR", "KOFEIINIKALKULAATOR"],
-    current: 0,
-  }),
+    links: ["PALK", "KÜTUS", "KOHV"],
+    current: 0
+  })
 };
 </script>
 <style scoped></style>
