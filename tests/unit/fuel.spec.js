@@ -1,10 +1,11 @@
+// Imports
 import Fuel from "@/components/fuel.vue";
 
+// Utilities
 import { shallowMount } from "@vue/test-utils";
 
 describe("fuel.vue", () => {
   const wrapper = shallowMount(Fuel);
-  const vm = wrapper.vm;
 
   test("testing setup correctly", () => {
     expect(true).toBe(true);

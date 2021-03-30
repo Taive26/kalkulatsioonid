@@ -4,7 +4,6 @@
       <v-col cols="12" md="4">
         <div id="app" align="center">
           <img
-            class="leftpane"
             src="@/assets/tired.png"
             alt="By Videoplasty.com, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=67046674"
           />
@@ -13,6 +12,7 @@
       <v-col cols="12" md="4" align="center" justify="center">
         <v-row>
           <v-text-field
+            input
             v-model.number="cups"
             hide-details="auto"
             label="Mitu tassi oled joonud?"
@@ -47,16 +47,17 @@
         </v-row>
         <v-row align="center" justify="center">
           <v-btn
-          class="ma-2 mb-7 mx-auto"
-          outlined
-          color="secondary"
-          align="center"
-          justify="center"
-          @click="calculateCoffee(cups, weight, intensity)"
-        > Arvuta
-        </v-btn>
+            class="ma-2 mb-7 mx-auto"
+            outlined
+            color="secondary"
+            align="center"
+            justify="center"
+            @click="calculateCoffee(cups, weight, intensity), updateCount()"
+          >
+            Arvuta
+          </v-btn>
         </v-row>
-        
+
         <v-row
           id="app"
           alt="answer"
@@ -66,16 +67,24 @@
         >
           <button>{{ answer }}</button>
         </v-row>
+
+        <v-row align="center" justify="center">
+          <button class="ma-2 mt-7 mx-auto">
+            Psst! Oled seda arvutust teinud juba {{ count }} korda :)
+          </button>
+        </v-row>
       </v-col>
 
-      <v-col cols="12" md="4">
-        <div
+      <v-col cols="12" md="4" align="center" justify="center">
+        <v-row
           id="app"
           alt="coffee cups"
-          class="d-flex flex-column justify-space-between align-center"
+          class="d-flex flex-column justify-space-between"
+          align="center"
+          justify="center"
         >
           <img class="rightpane" src="@/assets/coffee.png" />
-        </div>
+        </v-row>
       </v-col>
     </v-row>
   </v-container>
@@ -88,6 +97,20 @@ img.rightpane {
 img.leftpane {
   width: 250px;
 }
+
+@media screen and (max-width: 759px) {
+  .hidden {
+    display: none;
+  }
+
+  .mt-40 {
+    margin-top: 0px;
+  }
+
+  .row {
+    margin-top: 0px;
+  }
+}
 </style>
 
 <script>
@@ -95,19 +118,37 @@ export default {
   name: "Coffee",
   data() {
     return {
-      cups: 0,
       weight: 0,
       intensity: 0,
       answer: null,
       howIntense: [
-        { kind: "LAHJA PIIMALÜRBE (70 mg kofeiini)", caffeine: 70 },
-        { kind: "TASAKAALUKAS HARILIK (150 mg kofeiini)", caffeine: 150 },
-        { kind: "MUST KLEEPUV TÖKAT (300 mg kofeiini)", caffeine: 300 },
-      ],
+        { kind: "LAHJA PIIMALÜRBE", caffeine: 70 },
+        { kind: "TASAKAALUKAS HARILIK", caffeine: 150 },
+        { kind: "MUST KLEEPUV TÖKAT", caffeine: 300 }
+      ]
     };
   },
-
+  computed: {
+    count() {
+      return this.$store.state.count;
+    },
+    cups: {
+      get() {
+        return this.$store.state.cups;
+      },
+      set(value) {
+        this.$store.commit("savePreviousCups", value);
+      }
+    }
+  },
   methods: {
+    changeCups(event) {
+      this.$store.commit("savePreviousCups", event.target.value);
+    },
+
+    updateCount() {
+      this.$store.commit("countClicks");
+    },
     calculateCoffee(cups, weight, intensity) {
       const lethalDoseInGrams = weight * 200;
       const caffeineConsumed = intensity * cups;
@@ -115,15 +156,18 @@ export default {
       const cupsTillDeath = (caffeineTillDeath / intensity).toFixed();
       const answerToDisplay = cupsTillDeath - 1;
       this.answer =
-        "Saaksid juua veel " + answerToDisplay + " tassi kohvi, enne kui...";
-
+        "SAAKSID JUUA VEEL " +
+        answerToDisplay +
+        " TASSI KOHVI, ENNE KUI MULLA-MATI KÜLASTAB";
       if (answerToDisplay === 1) {
-        this.answer = "Saaksid juua veel VIIMASE tassi kohvi, enne kui...";
+        this.answer =
+          "Saaksid juua veel VIIMASE tassi kohvi, enne kui Mulla-Mati tuleb";
       }
       if (answerToDisplay <= 0) {
-        this.answer = "Kas sa päriselt jõid nii palju kohvi? Oled kindel et hingad veel?";
+        this.answer =
+          "Kas sa päriselt jõid nii palju kohvi? Oled juba teispoolsuses?";
       }
-    },
-  },
+    }
+  }
 };
 </script>

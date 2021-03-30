@@ -371,15 +371,8 @@ export default {
         this.employerTableItems = [
           {
             itemName: "Palgafond kokku",
-<<<<<<< Updated upstream
             resultAsMoney: +(salary + sotsiaalmaks + töötuskindlustus8).toFixed(2),
             resultAsPercent: 100,
-=======
-            resultAsMoney: +(salary + sotsiaalmaks + töötuskindlustus8).toFixed(
-              2
-            ),
-            resultAsPercent: 100
->>>>>>> Stashed changes
           },
           {
             itemName: "Brutopalk",
@@ -1011,4 +1004,5 @@ export default {
 .centered-input input {
   text-align: center;
 }
+
 </style>

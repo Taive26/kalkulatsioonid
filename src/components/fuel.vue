@@ -1,26 +1,90 @@
 <template>
-  <v-container>
-    <v-row class="mt-10" justify="center">
-      <v-col sm="4" md="4">
-        <v-checkbox label= "Teekonna pikkus" color="warning"></v-checkbox>
-        <v-checkbox label="Keskmine kütusekulu" color="warning"></v-checkbox>
-        <v-checkbox label="Kütuse kogus" color="warning"></v-checkbox>
+  <v-container class="v-responsive content">
+    <v-row class="mt-40 centered-input rounded-pill center">
+      <v-col xs="12" sm="6" md="4" lg="4" class="radiobuttons">
+        <v-row class="pa-2 primary rounded-pill row-space">
+          <input
+            type="radio"
+            name="options"
+            @change="onChange($event)"
+            value="journeyLength"
+          />Teepikkus
+        </v-row>
+        <v-row class="pa-2 primary rounded-pill row-space">
+          <input
+            type="radio"
+            name="options"
+            @change="onChange($event)"
+            value="fuelConsumption"
+          />Kütuse kulu
+        </v-row>
+        <v-row class="pa-2 primary rounded-pill row-space">
+          <input
+            type="radio"
+            name="options"
+            @change="onChange($event)"
+            value="fuelAmount"
+          />Kütuse kogus
+        </v-row>
+        <v-row class="pa-2 primary rounded-pill row-space">
+          <h4 align="center" justify="center">Kütuse hind: {{ result }} EUR</h4>
+        </v-row>
+        <v-row align="center" justify="center" xs="12" sm="6">
+          <img
+            class="leftpane-mob leftpane"
+            src="@/assets/fuelgauge.png"
+            alt="By Videoplasty.com, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=67046674"
+          />
+        </v-row>
       </v-col>
-      <v-col sm="4" md="4">
-        <v-text-field label="Teekonna pikkus" v-model="journeyLength" type="number" outlined ></v-text-field>
-        <v-text-field label="Keskmine kütusekulu" v-model="fuelConsumption" type="number" outlined></v-text-field>
-        <v-text-field label="Kütuse kogus" v-model="fuelAmount" type="number" outlined></v-text-field>
-         <v-text-field label="Kütuseühiku hind" v-model="fuelCost" type="number" outlined></v-text-field>
-      </v-col>
-      <v-col sm="4" md="4">
-        <v-select :items="journeyUnits" label="Kilomeeter(km)" outlined></v-select>
-        <v-select :items="consumptionUnits" label="Liitrit/100km" outlined></v-select>
-        <v-select :items="fuelUnits" label="Liiter(l)" outlined></v-select>
-      </v-col>
-    </v-row>
-    <v-row class="mt-10">
-      <v-col sm="12" md="12">
-        <h2>Kütuse maksumus: {{result}} EUR</h2>
+
+      <v-col sm="12" md="4" class="textboxes">
+        <v-text-field
+          label="Teekonna pikkus"
+          ref="journeyLength"
+          v-model.trim="journeyLength"
+          id="journeyLength"
+          name="journeyLength"
+          type="number"
+          class="form-control primary rounded-pill center"
+          v-on:keyup="check"
+          filled
+        >
+        </v-text-field>
+        <v-text-field
+          label="Keskmine kütusekulu"
+          ref="fuelConsumption"
+          v-model.trim="fuelConsumption"
+          id="fuelConsumption"
+          name="fuelConsumption"
+          type="number"
+          class="form-control primary rounded-pill"
+          v-on:keyup="check"
+          filled
+        >
+        </v-text-field>
+        <v-text-field
+          label="Kütuse kogus"
+          ref="fuelAmount"
+          v-model.trim="fuelAmount"
+          id="fuelAmount"
+          name="fuelAmount"
+          type="number"
+          class="form-control primary rounded-pill"
+          v-on:keyup="check"
+          filled
+        >
+        </v-text-field>
+        <v-text-field
+          label="Kütuseühiku hind"
+          v-model.trim="fuelCost"
+          type="number"
+          filled
+          id="fuelCost"
+          name="fuelCost"
+          class="primary rounded-pill"
+        >
+        </v-text-field>
       </v-col>
     </v-row>
   </v-container>
@@ -137,7 +201,6 @@ img.secret {
 </style>
 
 <script>
-
 export default {
   name: "Fuel",
   props: {
@@ -147,6 +210,8 @@ export default {
 
   data() {
     return {
+      options: String,
+      radioBoxOption: String,
       journeyLength: 0,
       fuelConsumption: 0,
       fuelAmount: 0,
@@ -166,17 +231,12 @@ export default {
     sum(journeyLength, fuelConsumption, fuelCost) {
       const input = (+journeyLength / +100) * +fuelConsumption * +fuelCost;
       if (Number.isFinite(input)) {
-        return (+journeyLength/+100) * +fuelConsumption * +fuelCost;
+        return (+journeyLength / +100) * +fuelConsumption * +fuelCost;
       } else {
         return 0;
       }
     },
     check: function() {
-      console.log(this.journeyLength);
-      console.log(this.fuelConsumption);
-      console.log(this.fuelAmount);
-      console.log(this.options);
-
       if (this.options === "journeyLength") {
         this.journeyLength = this.journeyLengthCalculation(
           this.fuelAmount,
