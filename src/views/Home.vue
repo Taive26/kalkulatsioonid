@@ -10,6 +10,6 @@ export default {
   name: "HOME",
   components: {
     Home
-  },
+  }
 };
 </script>

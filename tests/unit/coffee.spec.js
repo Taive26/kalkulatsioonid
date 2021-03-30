@@ -1,29 +1,18 @@
-import coffee from "@/components/coffee.vue";
-import Vuetify from "vuetify";
+// Imports
+import Coffee from "@/components/coffee.vue";
 
+// Utilities
+import { shallowMount } from "@vue/test-utils";
 
-import { createLocalVue, shallowMount } from "@vue/test-utils";
-
-describe("coffee.vue", () => { 
-    const wrapper = shallowMount(coffee)
-    const vm = wrapper.vm
-  const localVue = createLocalVue();
-
-  let vuetify;
-
-  beforeEach(() => {
-    vuetify = new Vuetify();
+describe("coffee.vue", () => {
+  test("testing setup correctly", () => {
+    expect(true).toBe(true);
   });
 
-  it("increments counter value on click", async () => {
-    const wrapper = mount(count)
-    const button = wrapper.find("v-btn")
-    const text = wrapper.find("button")
-  
-    expect(text.text()).toContain("teinud juba 0 korda")
-  
-    await button.trigger("click")
-  
-    expect(text.text()).toContain("teinud juba 1 korda")
-  })
-})
+  it("calculates coffee cups to go properly", () => {
+    const wrapper = shallowMount(Coffee);
+    const result = wrapper.vm.calculateCoffee(20, 150, 20);
+    expect(result).toBe(6);
+    expect(result).not.toBe(26);
+  });
+});

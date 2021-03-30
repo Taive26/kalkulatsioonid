@@ -1,5 +1,5 @@
 <template>
-  <v-container class="secondary v-responsive content">
+  <v-container class="v-responsive content">
     <v-row class="mt-40 centered-input rounded-pill center">
       <v-col xs="12" sm="6" md="4" lg="4" class="radiobuttons">
         <v-row class="pa-2 primary rounded-pill row-space">
@@ -131,22 +131,21 @@ img.secret {
   }
 
   .radiobuttons {
-  margin: auto;
-  width: 30%;
-  padding-top: 0px;
-  padding: 10px;
-  font-size: 1.25rem;
-}
+    margin: auto;
+    width: 30%;
+    padding-top: 0px;
+    padding: 10px;
+    font-size: 1.25rem;
+  }
 
-.row-space {
-  margin-top: 0px;
-}
+  .row-space {
+    margin-top: 0px;
+  }
 
   img.leftpane-mob {
     width: 0.2%;
     height: auto;
   }
-
 }
 
 @media screen and (max-width: 768px) {
@@ -206,7 +205,7 @@ export default {
   name: "Fuel",
   props: {
     msg: String,
-    chooseCalculation: String,
+    chooseCalculation: String
   },
 
   data() {
@@ -216,7 +215,7 @@ export default {
       journeyLength: 0,
       fuelConsumption: 0,
       fuelAmount: 0,
-      fuelCost: 0,
+      fuelCost: 0
     };
   },
   computed: {
@@ -226,7 +225,7 @@ export default {
         this.fuelConsumption,
         this.fuelCost
       ).toFixed(2);
-    },
+    }
   },
   methods: {
     sum(journeyLength, fuelConsumption, fuelCost) {
@@ -277,7 +276,7 @@ export default {
 
     onChange(event) {
       this.options = event.target.value;
-    },
-  },
+    }
+  }
 };
 </script>
