@@ -43,13 +43,12 @@ export default {
   components: {
     salary,
     coffee,
-    fuel,
+    fuel
   },
   data: () => ({
     links: ["PALK", "KÜTUS", "KOHV"],
-    current: 0,
-  }),
+    current: 0
+  })
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

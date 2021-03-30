@@ -158,10 +158,10 @@ export default {
       chartOptions: {
         chart: {
           width: 500,
-          type: "pie",
+          type: "pie"
         },
         theme: {
-          palette: "palette3",
+          palette: "palette3"
         },
         labels: ["Netopalk", "Töötuskindlustus", "Kogumispension", "Tulumaks"],
         responsive: [
@@ -169,66 +169,66 @@ export default {
             breakpoint: 2000,
             options: {
               chart: {
-                width: 350,
+                width: 350
               },
               legend: {
-                position: "bottom",
-              },
-            },
-          },
-        ],
+                position: "bottom"
+              }
+            }
+          }
+        ]
       },
 
       employerTableItems: [
         {
           itemName: "Palgafond kokku",
           resultAsMoney: "0",
-          resultAsPercent: "0",
+          resultAsPercent: "0"
         },
         {
           itemName: "Brutopalk",
           resultAsMoney: "0",
-          resultAsPercent: "0",
+          resultAsPercent: "0"
         },
         {
           itemName: "Sotsiaalmaks",
           resultAsMoney: "0",
-          resultAsPercent: "0",
+          resultAsPercent: "0"
         },
         {
           itemName: "Töötuskindlustus",
           resultAsMoney: "0",
-          resultAsPercent: "0",
-        },
+          resultAsPercent: "0"
+        }
       ],
 
       employeeTableItems: [
         {
           itemName: "Brutopalk",
           resultAsMoney: "0",
-          resultAsPercent: "0",
+          resultAsPercent: "0"
         },
         {
           itemName: "Töötuskindlustus",
           resultAsMoney: "0",
-          resultAsPercent: "0",
+          resultAsPercent: "0"
         },
         {
           itemName: "Kogumispension",
           resultAsMoney: "0",
-          resultAsPercent: "0",
+          resultAsPercent: "0"
         },
         {
           itemName: "Tulumaks",
           resultAsMoney: "0",
-          resultAsPercent: "0",
+          resultAsPercent: "0"
         },
         {
           itemName: "Netopalk",
           resultAsMoney: "0",
-          resultAsPercent: "0",
-        },
-      ],
+          resultAsPercent: "0"
+        }
+      ]
     };
   },
   computed: {},
@@ -253,51 +253,51 @@ export default {
         {
           itemName: "Palgafond kokku",
           resultAsMoney: salary,
-          resultAsPercent: 100,
+          resultAsPercent: 100
         },
         {
           itemName: "Brutopalk",
           resultAsMoney: salary,
-          resultAsPercent: +((salary / salary) * 100).toFixed(2),
+          resultAsPercent: +((salary / salary) * 100).toFixed(2)
         },
         {
           itemName: "Sotsiaalmaks",
           resultAsMoney: 0,
-          resultAsPercent: +((0 / salary) * 100).toFixed(2),
+          resultAsPercent: +((0 / salary) * 100).toFixed(2)
         },
         {
           itemName: "Töötuskindlustus",
           resultAsMoney: 0,
-          resultAsPercent: +((0 / salary) * 100).toFixed(2),
-        },
+          resultAsPercent: +((0 / salary) * 100).toFixed(2)
+        }
       ];
 
       this.employeeTableItems = [
         {
           itemName: "Brutopalk",
           resultAsMoney: salary,
-          resultAsPercent: 100,
+          resultAsPercent: 100
         },
         {
           itemName: "Töötuskindlustus",
           resultAsMoney: 0,
-          resultAsPercent: 0,
+          resultAsPercent: 0
         },
         {
           itemName: "Kogumispension",
           resultAsMoney: 0,
-          resultAsPercent: 0,
+          resultAsPercent: 0
         },
         {
           itemName: "Tulumaks",
           resultAsMoney: 0,
-          resultAsPercent: (0 / salary) * 100,
+          resultAsPercent: (0 / salary) * 100
         },
         {
           itemName: "Netopalk",
           resultAsMoney: netopalk,
-          resultAsPercent: (salary / salary) * 100,
-        },
+          resultAsPercent: (salary / salary) * 100
+        }
       ];
 
       this.series = [netopalk, 0, 0, 0];
@@ -307,7 +307,7 @@ export default {
           {
             itemName: "Palgafond kokku",
             resultAsMoney: salary + sotsiaalmaks,
-            resultAsPercent: 100,
+            resultAsPercent: 100
           },
           {
             itemName: "Brutopalk",
@@ -315,7 +315,7 @@ export default {
             resultAsPercent: +(
               (salary / (salary + sotsiaalmaks)) *
               100
-            ).toFixed(2),
+            ).toFixed(2)
           },
           {
             itemName: "Sotsiaalmaks",
@@ -323,13 +323,13 @@ export default {
             resultAsPercent: +(
               (sotsiaalmaks / (salary + sotsiaalmaks)) *
               100
-            ).toFixed(2),
+            ).toFixed(2)
           },
           {
             itemName: "Töötuskindlustus",
             resultAsMoney: 0,
-            resultAsPercent: +((0 / salary) * 100).toFixed(2),
-          },
+            resultAsPercent: +((0 / salary) * 100).toFixed(2)
+          }
         ];
       }
 
@@ -338,7 +338,7 @@ export default {
           {
             itemName: "Palgafond kokku",
             resultAsMoney: salary + töötuskindlustus8,
-            resultAsPercent: 100,
+            resultAsPercent: 100
           },
           {
             itemName: "Brutopalk",
@@ -346,7 +346,7 @@ export default {
             resultAsPercent: +(
               (salary / (salary + töötuskindlustus8)) *
               100
-            ).toFixed(2),
+            ).toFixed(2)
           },
           {
             itemName: "Sotsiaalmaks",
@@ -354,7 +354,7 @@ export default {
             resultAsPercent: +(
               (0 / (salary + töötuskindlustus8)) *
               100
-            ).toFixed(2),
+            ).toFixed(2)
           },
           {
             itemName: "Töötuskindlustus",
@@ -362,8 +362,8 @@ export default {
             resultAsPercent: +(
               (töötuskindlustus8 / (salary + töötuskindlustus8)) *
               100
-            ).toFixed(2),
-          },
+            ).toFixed(2)
+          }
         ];
       }
 
@@ -374,7 +374,7 @@ export default {
             resultAsMoney: +(salary + sotsiaalmaks + töötuskindlustus8).toFixed(
               2
             ),
-            resultAsPercent: 100,
+            resultAsPercent: 100
           },
           {
             itemName: "Brutopalk",
@@ -382,7 +382,7 @@ export default {
             resultAsPercent: +(
               (salary / (salary + sotsiaalmaks + töötuskindlustus8)) *
               100
-            ).toFixed(2),
+            ).toFixed(2)
           },
           {
             itemName: "Sotsiaalmaks",
@@ -390,7 +390,7 @@ export default {
             resultAsPercent: +(
               (sotsiaalmaks / (salary + sotsiaalmaks + töötuskindlustus8)) *
               100
-            ).toFixed(2),
+            ).toFixed(2)
           },
           {
             itemName: "Töötuskindlustus",
@@ -399,8 +399,8 @@ export default {
               (töötuskindlustus8 /
                 (salary + sotsiaalmaks + töötuskindlustus8)) *
               100
-            ).toFixed(2),
-          },
+            ).toFixed(2)
+          }
         ];
       }
 
@@ -410,22 +410,22 @@ export default {
             {
               itemName: "Brutopalk",
               resultAsMoney: salary,
-              resultAsPercent: 100,
+              resultAsPercent: 100
             },
             {
               itemName: "Töötuskindlustus",
               resultAsMoney: 0,
-              resultAsPercent: 0,
+              resultAsPercent: 0
             },
             {
               itemName: "Kogumispension",
               resultAsMoney: 0,
-              resultAsPercent: 0,
+              resultAsPercent: 0
             },
             {
               itemName: "Tulumaks",
               resultAsMoney: taxOnRevenue1,
-              resultAsPercent: +((taxOnRevenue1 / salary) * 100).toFixed(2),
+              resultAsPercent: +((taxOnRevenue1 / salary) * 100).toFixed(2)
             },
             {
               itemName: "Netopalk",
@@ -433,8 +433,8 @@ export default {
               resultAsPercent: +(
                 ((salary - taxOnRevenue1) / salary) *
                 100
-              ).toFixed(2),
-            },
+              ).toFixed(2)
+            }
           ];
           this.series = [salary - taxOnRevenue1, 0, 0, taxOnRevenue1];
         }
@@ -443,22 +443,22 @@ export default {
             {
               itemName: "Brutopalk",
               resultAsMoney: salary,
-              resultAsPercent: 100,
+              resultAsPercent: 100
             },
             {
               itemName: "Töötuskindlustus",
               resultAsMoney: 0,
-              resultAsPercent: 0,
+              resultAsPercent: 0
             },
             {
               itemName: "Kogumispension",
               resultAsMoney: 0,
-              resultAsPercent: 0,
+              resultAsPercent: 0
             },
             {
               itemName: "Tulumaks",
               resultAsMoney: taxOnRevenue2,
-              resultAsPercent: +((taxOnRevenue2 / salary) * 100).toFixed(2),
+              resultAsPercent: +((taxOnRevenue2 / salary) * 100).toFixed(2)
             },
             {
               itemName: "Netopalk",
@@ -466,14 +466,14 @@ export default {
               resultAsPercent: +(
                 ((salary - taxOnRevenue2) / salary) *
                 100
-              ).toFixed(2),
-            },
+              ).toFixed(2)
+            }
           ];
           this.series = [
             +(salary - taxOnRevenue2).toFixed(2),
             0,
             0,
-            taxOnRevenue2,
+            taxOnRevenue2
           ];
         }
 
@@ -482,22 +482,22 @@ export default {
             {
               itemName: "Brutopalk",
               resultAsMoney: salary,
-              resultAsPercent: 100,
+              resultAsPercent: 100
             },
             {
               itemName: "Töötuskindlustus",
               resultAsMoney: 0,
-              resultAsPercent: 0,
+              resultAsPercent: 0
             },
             {
               itemName: "Kogumispension",
               resultAsMoney: 0,
-              resultAsPercent: 0,
+              resultAsPercent: 0
             },
             {
               itemName: "Tulumaks",
               resultAsMoney: taxOnRevenue3,
-              resultAsPercent: +((taxOnRevenue3 / salary) * 100).toFixed(2),
+              resultAsPercent: +((taxOnRevenue3 / salary) * 100).toFixed(2)
             },
             {
               itemName: "Netopalk",
@@ -505,14 +505,14 @@ export default {
               resultAsPercent: +(
                 ((salary - taxOnRevenue3) / salary) *
                 100
-              ).toFixed(2),
-            },
+              ).toFixed(2)
+            }
           ];
           this.series = [
             +(salary - taxOnRevenue3).toFixed(2),
             0,
             0,
-            taxOnRevenue3,
+            taxOnRevenue3
           ];
         }
       }
@@ -522,22 +522,22 @@ export default {
           {
             itemName: "Brutopalk",
             resultAsMoney: salary,
-            resultAsPercent: 100,
+            resultAsPercent: 100
           },
           {
             itemName: "Töötuskindlustus",
             resultAsMoney: töötuskindlustus16,
-            resultAsPercent: +((töötuskindlustus16 / salary) * 100).toFixed(2),
+            resultAsPercent: +((töötuskindlustus16 / salary) * 100).toFixed(2)
           },
           {
             itemName: "Kogumispension",
             resultAsMoney: 0,
-            resultAsPercent: 0,
+            resultAsPercent: 0
           },
           {
             itemName: "Tulumaks",
             resultAsMoney: 0,
-            resultAsPercent: 0,
+            resultAsPercent: 0
           },
           {
             itemName: "Netopalk",
@@ -545,8 +545,8 @@ export default {
             resultAsPercent: +(
               ((salary - töötuskindlustus16) / salary) *
               100
-            ).toFixed(2),
-          },
+            ).toFixed(2)
+          }
         ];
         this.series = [salary - töötuskindlustus16, töötuskindlustus16, 0, 0];
       }
@@ -557,24 +557,22 @@ export default {
             {
               itemName: "Brutopalk",
               resultAsMoney: salary,
-              resultAsPercent: 100,
+              resultAsPercent: 100
             },
             {
               itemName: "Töötuskindlustus",
               resultAsMoney: töötuskindlustus16,
-              resultAsPercent: +((töötuskindlustus16 / salary) * 100).toFixed(
-                2
-              ),
+              resultAsPercent: +((töötuskindlustus16 / salary) * 100).toFixed(2)
             },
             {
               itemName: "Kogumispension",
               resultAsMoney: 0,
-              resultAsPercent: 0,
+              resultAsPercent: 0
             },
             {
               itemName: "Tulumaks",
               resultAsMoney: taxOnRevenue1,
-              resultAsPercent: +((taxOnRevenue1 / salary) * 100).toFixed(2),
+              resultAsPercent: +((taxOnRevenue1 / salary) * 100).toFixed(2)
             },
             {
               itemName: "Netopalk",
@@ -582,14 +580,14 @@ export default {
               resultAsPercent: +(
                 ((salary - töötuskindlustus16 - taxOnRevenue1) / salary) *
                 100
-              ).toFixed(2),
-            },
+              ).toFixed(2)
+            }
           ];
           this.series = [
             salary - töötuskindlustus16 - taxOnRevenue1,
             töötuskindlustus16,
             0,
-            taxOnRevenue1,
+            taxOnRevenue1
           ];
         }
         if (salary >= 1201 && salary <= 2099) {
@@ -597,24 +595,22 @@ export default {
             {
               itemName: "Brutopalk",
               resultAsMoney: salary,
-              resultAsPercent: 100,
+              resultAsPercent: 100
             },
             {
               itemName: "Töötuskindlustus",
               resultAsMoney: töötuskindlustus16,
-              resultAsPercent: +((töötuskindlustus16 / salary) * 100).toFixed(
-                2
-              ),
+              resultAsPercent: +((töötuskindlustus16 / salary) * 100).toFixed(2)
             },
             {
               itemName: "Kogumispension",
               resultAsMoney: 0,
-              resultAsPercent: 0,
+              resultAsPercent: 0
             },
             {
               itemName: "Tulumaks",
               resultAsMoney: taxOnRevenue2,
-              resultAsPercent: +((taxOnRevenue2 / salary) * 100).toFixed(2),
+              resultAsPercent: +((taxOnRevenue2 / salary) * 100).toFixed(2)
             },
             {
               itemName: "Netopalk",
@@ -626,14 +622,14 @@ export default {
               resultAsPercent: +(
                 ((salary - töötuskindlustus16 - taxOnRevenue2) / salary) *
                 100
-              ).toFixed(2),
-            },
+              ).toFixed(2)
+            }
           ];
           this.series = [
             salary - töötuskindlustus16 - taxOnRevenue2,
             töötuskindlustus16,
             0,
-            taxOnRevenue2,
+            taxOnRevenue2
           ];
         }
 
@@ -642,24 +638,22 @@ export default {
             {
               itemName: "Brutopalk",
               resultAsMoney: salary,
-              resultAsPercent: 100,
+              resultAsPercent: 100
             },
             {
               itemName: "Töötuskindlustus",
               resultAsMoney: töötuskindlustus16,
-              resultAsPercent: +((töötuskindlustus16 / salary) * 100).toFixed(
-                2
-              ),
+              resultAsPercent: +((töötuskindlustus16 / salary) * 100).toFixed(2)
             },
             {
               itemName: "Kogumispension",
               resultAsMoney: 0,
-              resultAsPercent: 0,
+              resultAsPercent: 0
             },
             {
               itemName: "Tulumaks",
               resultAsMoney: taxOnRevenue3,
-              resultAsPercent: +((taxOnRevenue3 / salary) * 100).toFixed(2),
+              resultAsPercent: +((taxOnRevenue3 / salary) * 100).toFixed(2)
             },
             {
               itemName: "Netopalk",
@@ -671,14 +665,14 @@ export default {
               resultAsPercent: +(
                 ((salary - töötuskindlustus16 - taxOnRevenue3) / salary) *
                 100
-              ).toFixed(2),
-            },
+              ).toFixed(2)
+            }
           ];
           this.series = [
             salary - töötuskindlustus16 - taxOnRevenue3,
             töötuskindlustus16,
             0,
-            taxOnRevenue3,
+            taxOnRevenue3
           ];
         }
       }
@@ -688,28 +682,28 @@ export default {
           {
             itemName: "Brutopalk",
             resultAsMoney: salary,
-            resultAsPercent: 100,
+            resultAsPercent: 100
           },
           {
             itemName: "Töötuskindlustus",
             resultAsMoney: 0,
-            resultAsPercent: 0,
+            resultAsPercent: 0
           },
           {
             itemName: "Kogumispension",
             resultAsMoney: pension,
-            resultAsPercent: +((pension / salary) * 100).toFixed(2),
+            resultAsPercent: +((pension / salary) * 100).toFixed(2)
           },
           {
             itemName: "Tulumaks",
             resultAsMoney: 0,
-            resultAsPercent: 0,
+            resultAsPercent: 0
           },
           {
             itemName: "Netopalk",
             resultAsMoney: salary - pension,
-            resultAsPercent: +(((salary - pension) / salary) * 100).toFixed(2),
-          },
+            resultAsPercent: +(((salary - pension) / salary) * 100).toFixed(2)
+          }
         ];
         this.series = [salary - pension, 0, pension, 0];
       }
@@ -720,22 +714,22 @@ export default {
             {
               itemName: "Brutopalk",
               resultAsMoney: salary,
-              resultAsPercent: 100,
+              resultAsPercent: 100
             },
             {
               itemName: "Töötuskindlustus",
               resultAsMoney: 0,
-              resultAsPercent: 0,
+              resultAsPercent: 0
             },
             {
               itemName: "Kogumispension",
               resultAsMoney: pension,
-              resultAsPercent: +((pension / salary) * 100).toFixed(2),
+              resultAsPercent: +((pension / salary) * 100).toFixed(2)
             },
             {
               itemName: "Tulumaks",
               resultAsMoney: taxOnRevenue1,
-              resultAsPercent: +((taxOnRevenue1 / salary) * 100).toFixed(2),
+              resultAsPercent: +((taxOnRevenue1 / salary) * 100).toFixed(2)
             },
             {
               itemName: "Netopalk",
@@ -743,14 +737,14 @@ export default {
               resultAsPercent: +(
                 ((salary - pension - taxOnRevenue1) / salary) *
                 100
-              ).toFixed(2),
-            },
+              ).toFixed(2)
+            }
           ];
           this.series = [
             salary - pension - taxOnRevenue1,
             0,
             pension,
-            taxOnRevenue1,
+            taxOnRevenue1
           ];
         }
         if (salary >= 1201 && salary <= 2099) {
@@ -758,22 +752,22 @@ export default {
             {
               itemName: "Brutopalk",
               resultAsMoney: salary,
-              resultAsPercent: 100,
+              resultAsPercent: 100
             },
             {
               itemName: "Töötuskindlustus",
               resultAsMoney: 0,
-              resultAsPercent: 0,
+              resultAsPercent: 0
             },
             {
               itemName: "Kogumispension",
               resultAsMoney: pension,
-              resultAsPercent: +((pension / salary) * 100).toFixed(2),
+              resultAsPercent: +((pension / salary) * 100).toFixed(2)
             },
             {
               itemName: "Tulumaks",
               resultAsMoney: taxOnRevenue2,
-              resultAsPercent: +((taxOnRevenue2 / salary) * 100).toFixed(2),
+              resultAsPercent: +((taxOnRevenue2 / salary) * 100).toFixed(2)
             },
             {
               itemName: "Netopalk",
@@ -781,14 +775,14 @@ export default {
               resultAsPercent: +(
                 ((salary - pension - taxOnRevenue2) / salary) *
                 100
-              ).toFixed(2),
-            },
+              ).toFixed(2)
+            }
           ];
           this.series = [
             salary - pension - taxOnRevenue2,
             0,
             pension,
-            taxOnRevenue2,
+            taxOnRevenue2
           ];
         }
 
@@ -797,22 +791,22 @@ export default {
             {
               itemName: "Brutopalk",
               resultAsMoney: salary,
-              resultAsPercent: 100,
+              resultAsPercent: 100
             },
             {
               itemName: "Töötuskindlustus",
               resultAsMoney: 0,
-              resultAsPercent: 0,
+              resultAsPercent: 0
             },
             {
               itemName: "Kogumispension",
               resultAsMoney: 0,
-              resultAsPercent: 0,
+              resultAsPercent: 0
             },
             {
               itemName: "Tulumaks",
               resultAsMoney: taxOnRevenue3,
-              resultAsPercent: +((taxOnRevenue3 / salary) * 100).toFixed(2),
+              resultAsPercent: +((taxOnRevenue3 / salary) * 100).toFixed(2)
             },
             {
               itemName: "Netopalk",
@@ -820,14 +814,14 @@ export default {
               resultAsPercent: +(
                 ((salary - pension - taxOnRevenue3) / salary) *
                 100
-              ).toFixed(2),
-            },
+              ).toFixed(2)
+            }
           ];
           this.series = [
             salary - pension - taxOnRevenue3,
             0,
             pension,
-            taxOnRevenue3,
+            taxOnRevenue3
           ];
         }
       }
@@ -837,22 +831,22 @@ export default {
           {
             itemName: "Brutopalk",
             resultAsMoney: salary,
-            resultAsPercent: 100,
+            resultAsPercent: 100
           },
           {
             itemName: "Töötuskindlustus",
             resultAsMoney: töötuskindlustus16,
-            resultAsPercent: +((töötuskindlustus16 / salary) * 100).toFixed(2),
+            resultAsPercent: +((töötuskindlustus16 / salary) * 100).toFixed(2)
           },
           {
             itemName: "Kogumispension",
             resultAsMoney: pension,
-            resultAsPercent: +((pension / salary) * 100).toFixed(2),
+            resultAsPercent: +((pension / salary) * 100).toFixed(2)
           },
           {
             itemName: "Tulumaks",
             resultAsMoney: 0,
-            resultAsPercent: 0,
+            resultAsPercent: 0
           },
           {
             itemName: "Netopalk",
@@ -860,14 +854,14 @@ export default {
             resultAsPercent: +(
               ((salary - pension - töötuskindlustus16) / salary) *
               100
-            ).toFixed(2),
-          },
+            ).toFixed(2)
+          }
         ];
         this.series = [
           salary - pension - töötuskindlustus16,
           töötuskindlustus16,
           pension,
-          0,
+          0
         ];
       }
 
@@ -877,24 +871,22 @@ export default {
             {
               itemName: "Brutopalk",
               resultAsMoney: salary,
-              resultAsPercent: 100,
+              resultAsPercent: 100
             },
             {
               itemName: "Töötuskindlustus",
               resultAsMoney: töötuskindlustus16,
-              resultAsPercent: +((töötuskindlustus16 / salary) * 100).toFixed(
-                2
-              ),
+              resultAsPercent: +((töötuskindlustus16 / salary) * 100).toFixed(2)
             },
             {
               itemName: "Kogumispension",
               resultAsMoney: pension,
-              resultAsPercent: +((pension / salary) * 100).toFixed(2),
+              resultAsPercent: +((pension / salary) * 100).toFixed(2)
             },
             {
               itemName: "Tulumaks",
               resultAsMoney: taxOnRevenue1,
-              resultAsPercent: +((taxOnRevenue1 / salary) * 100).toFixed(2),
+              resultAsPercent: +((taxOnRevenue1 / salary) * 100).toFixed(2)
             },
             {
               itemName: "Netopalk",
@@ -904,14 +896,14 @@ export default {
                 ((salary - pension - taxOnRevenue1 - töötuskindlustus16) /
                   salary) *
                 100
-              ).toFixed(2),
-            },
+              ).toFixed(2)
+            }
           ];
           this.series = [
             salary - pension - taxOnRevenue1 - töötuskindlustus16,
             töötuskindlustus16,
             pension,
-            taxOnRevenue1,
+            taxOnRevenue1
           ];
         }
         if (salary >= 1201 && salary <= 2099) {
@@ -919,24 +911,22 @@ export default {
             {
               itemName: "Brutopalk",
               resultAsMoney: salary,
-              resultAsPercent: 100,
+              resultAsPercent: 100
             },
             {
               itemName: "Töötuskindlustus",
               resultAsMoney: töötuskindlustus16,
-              resultAsPercent: +((töötuskindlustus16 / salary) * 100).toFixed(
-                2
-              ),
+              resultAsPercent: +((töötuskindlustus16 / salary) * 100).toFixed(2)
             },
             {
               itemName: "Kogumispension",
               resultAsMoney: pension,
-              resultAsPercent: +((pension / salary) * 100).toFixed(2),
+              resultAsPercent: +((pension / salary) * 100).toFixed(2)
             },
             {
               itemName: "Tulumaks",
               resultAsMoney: taxOnRevenue2,
-              resultAsPercent: +((taxOnRevenue2 / salary) * 100).toFixed(2),
+              resultAsPercent: +((taxOnRevenue2 / salary) * 100).toFixed(2)
             },
             {
               itemName: "Netopalk",
@@ -950,14 +940,14 @@ export default {
                 ((salary - pension - taxOnRevenue2 - töötuskindlustus16) /
                   salary) *
                 100
-              ).toFixed(2),
-            },
+              ).toFixed(2)
+            }
           ];
           this.series = [
             salary - pension - taxOnRevenue2 - töötuskindlustus16,
             töötuskindlustus16,
             pension,
-            taxOnRevenue2,
+            taxOnRevenue2
           ];
         }
 
@@ -966,7 +956,7 @@ export default {
             {
               itemName: "Brutopalk",
               resultAsMoney: salary,
-              resultAsPercent: 100,
+              resultAsPercent: 100
             },
             {
               itemName: "Töötuskindlustus",
@@ -976,12 +966,12 @@ export default {
             {
               itemName: "Kogumispension",
               resultAsMoney: pension,
-              resultAsPercent: +((pension / salary) * 100).toFixed(2),
+              resultAsPercent: +((pension / salary) * 100).toFixed(2)
             },
             {
               itemName: "Tulumaks",
               resultAsMoney: taxOnRevenue3,
-              resultAsPercent: +((taxOnRevenue3 / salary) * 100).toFixed(2),
+              resultAsPercent: +((taxOnRevenue3 / salary) * 100).toFixed(2)
             },
             {
               itemName: "Netopalk",
@@ -995,19 +985,19 @@ export default {
                 ((salary - pension - taxOnRevenue3 - töötuskindlustus16) /
                   salary) *
                 100
-              ).toFixed(2),
-            },
+              ).toFixed(2)
+            }
           ];
           this.series = [
             salary - pension - taxOnRevenue3 - töötuskindlustus16,
             töötuskindlustus16,
             pension,
-            taxOnRevenue3,
+            taxOnRevenue3
           ];
         }
       }
-    },
-  },
+    }
+  }
 };
 </script>
 <style>

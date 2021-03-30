@@ -125,7 +125,7 @@ export default {
         { kind: "LAHJA PIIMALÜRBE", caffeine: 70 },
         { kind: "TASAKAALUKAS HARILIK", caffeine: 150 },
         { kind: "MUST KLEEPUV TÖKAT", caffeine: 300 }
-      ],
+      ]
     };
   },
   computed: {
@@ -138,8 +138,8 @@ export default {
       },
       set(value) {
         this.$store.commit("savePreviousCups", value);
-      },
-    },
+      }
+    }
   },
   methods: {
     changeCups(event) {
