@@ -2,10 +2,7 @@
   <v-app>
     <v-app-bar app color="primary" light flat>
       <v-tabs centered class="ml-n9" color="grey darken-1">
-        <v-tab
-          v-for="(link, i) in links" :to="link.path" :key="i">{{ link.name }}
-        >
-          {{ link }}
+        <v-tab v-for="(link, i) in links" :to="link.path" :key="i">{{ link.name }} 
         </v-tab>
       </v-tabs>
     </v-app-bar>
@@ -20,6 +17,7 @@
 
 <script>
 import { routes } from './router/index'
+console.log(routes);
   export default {
     data () {
       return {
@@ -28,4 +26,5 @@ import { routes } from './router/index'
     }
   }
 </script>
+
 
