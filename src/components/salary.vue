@@ -371,10 +371,8 @@ export default {
         this.employerTableItems = [
           {
             itemName: "Palgafond kokku",
-            resultAsMoney: +(salary + sotsiaalmaks + töötuskindlustus8).toFixed(
-              2
-            ),
-            resultAsPercent: 100
+            resultAsMoney: +(salary + sotsiaalmaks + töötuskindlustus8).toFixed(2),
+            resultAsPercent: 100,
           },
           {
             itemName: "Brutopalk",
@@ -961,7 +959,9 @@ export default {
             {
               itemName: "Töötuskindlustus",
               resultAsMoney: töötuskindlustus16,
-              resultAsPercent: +((töötuskindlustus16 / salary) * 100).toFixed(2)
+              resultAsPercent: +((töötuskindlustus16 / salary) * 100).toFixed(
+                2
+              ),
             },
             {
               itemName: "Kogumispension",
@@ -1004,4 +1004,5 @@ export default {
 .centered-input input {
   text-align: center;
 }
+
 </style>
