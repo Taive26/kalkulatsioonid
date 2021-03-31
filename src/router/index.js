@@ -1,30 +1,33 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Coffee from './../views/Coffee'
+import Fuel from './../views/Fuel'
+import Salary from './../views/Salary'
 
 Vue.use(VueRouter);
 
-const routes = [
+export const routes = [
   {
-    path: "/palk",
-    name: "Palgakalkulaator",
-    component: () => import("../views/Salary.vue")
+    path: '/coffee',
+    name: 'Kofeiinikalkulaator',
+    components: { default: Coffee }
   },
   {
-    path: "/kytus",
-    name: "Kütusekalkulaator",
-    component: () => import("../views/Fuel.vue")
+    path: '/fuel',
+    name: 'Kütusekalkulaator',
+    components: { default: Fuel }
   },
   {
-    path: "/kohv",
-    name: "Kofeiinikalkulaator",
-    component: () => import("../views/Coffee.vue")
+    path: '/salary',
+    name: 'Palgakalkulaator',
+    components: { default: Salary }
   }
-];
+]
 
 const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes
+  routes,
+  linkActiveClass: 'active',
+  mode: 'history'
 });
 
 export default router;
