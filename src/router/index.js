@@ -9,17 +9,17 @@ Vue.use(VueRouter);
 export const routes = [
   {
     path: '/coffee',
-    name: 'Kofeiinikalkulaator',
+    name: 'Kohv',
     components: { default: Coffee }
   },
   {
     path: '/fuel',
-    name: 'Kütusekalkulaator',
+    name: 'Kütus',
     components: { default: Fuel }
   },
   {
     path: '/salary',
-    name: 'Palgakalkulaator',
+    name: 'Palk',
     components: { default: Salary }
   }
 ]
